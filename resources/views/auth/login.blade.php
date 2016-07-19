@@ -15,7 +15,7 @@
             {!! csrf_field() !!}
 
             <div class="form-group has-feedback">
-                <input type="email" class="form-control" name="email" value="{{ old('email') }}">
+                <input type="email" placeholder="Your email" class="form-control" name="email" value="{{ old('email') }}">
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
             </div>
             @if ($errors->has('email'))
@@ -25,7 +25,7 @@
             @endif
 
             <div class="form-group has-feedback">
-                <input type="password" class="form-control" name="password">
+                <input type="password" placeholder="Password" class="form-control" name="password">
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
             @if ($errors->has('password'))
@@ -38,6 +38,9 @@
 
                 <div class="col-xs-4">
                     <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+                </div>
+                <div class="col-xs-4">
+                    <a href="/register" class="btn btn-primary btn-block btn-flat">Register</a>
                 </div>
             </div>
         </form>
