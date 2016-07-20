@@ -23,13 +23,12 @@ class Followers extends Controller
        else{
            return redirect('/settings');
        }
-        try {
-            $twFolCount = self::twFollowers();
-        }
-        catch (\Exception $e){
-            return $e->getMessage();
-        }
-       return view('followers',compact('followers','twitter','twFolCount'));
+       $data = new HomeController();
+       $fbLikes = $data->fbLikes();
+       $twFollowers = $data->twFollowers();
+       $tuFollowers = $data->tuFollowers();
+
+       return view('followers',compact('fbLikes','twFollowers','tuFollowers'));
 
    }
 

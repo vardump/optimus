@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
@@ -208,5 +209,39 @@ class Prappo extends Controller
             'time'=>$time
         ];
         $pusher->trigger('optimus', 'my_event', $data);
+    }
+
+    public static function tuCheck(){
+        if(Setting::where('field','tuTokenSec')->exists()){
+            foreach (Setting::where('field','tuTokenSec')->get() as $d){
+                if($d->value == ""){
+                    return redirect('/settings');
+                }
+            }
+        }
+        else{
+            return redirect('/settings');
+        }
+    }
+
+    public static function twCheck()
+    {
+        if(Setting::where('field','twTokenSec')->exists()){
+            foreach (Setting::where('field','twTokenSec')->get() as $d){
+                if($d->value == ""){
+                    return redirect('/settings');
+                }
+            }
+        }
+        else{
+            return redirect('/settings');
+        }
+
+    }
+
+    public static function writeCheck(){
+        self::index();
+
+
     }
 }

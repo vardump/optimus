@@ -12,11 +12,33 @@ class Scraper extends Controller
     //
     public function index()
     {
+        if (Setting::where('field', 'fbAppSec')->exists()) {
+            foreach (Setting::where('field', 'fbAppSec')->get() as $d) {
+                if ($d->value == "") {
+                    return redirect('/settings');
+                }
+            }
+        } else {
+            return redirect('/settings');
+        }
+
         return view('scraper');
     }
 
     public function twScraper()
     {
+        if(Setting::where('field','twTokenSec')->exists()){
+            foreach (Setting::where('field','twTokenSec')->get() as $d){
+                if($d->value == ""){
+                    return redirect('/settings');
+                }
+            }
+        }
+        else{
+            return redirect('/settings');
+        }
+
+
         if (Setting::where('field', 'twTokenSec')->exists()) {
             foreach (Setting::where('field', 'twTokenSec')->get() as $d) {
                 if ($d->value == "") {

@@ -25,7 +25,6 @@ class Facebook extends Controller
             return redirect('/settings');
         }
 
-
         $defPage = Data::get('fbDefPage');
         $fbPages = FacebookPages::all();
         $likes = 0;
@@ -77,8 +76,6 @@ class Facebook extends Controller
             return redirect('/settings');
         }
 
-        $defPage = Data::get('fbDefPage');
-        $fbPages = FacebookPages::all();
         $likes = 0;
         $love = 0;
         $sad = 0;
@@ -671,12 +668,11 @@ class Facebook extends Controller
                         echo '<td> <span class=\'label label-danger\'><i class=\'fa fa-times badge-danger\'></i></span> </td>';
                     }
                     if (isset($data['owner'])) {
-                        echo '<td><img src="' . $data['owner']['picture']['data']['url'] . '"><br>' . '<a target="_blank" href="'.$data['owner']['link'].'">'.$data['owner']['name'].'</a></td>';
-                    }
-                    else{
+                        echo '<td><img src="' . $data['owner']['picture']['data']['url'] . '"><br>' . '<a target="_blank" href="' . $data['owner']['link'] . '">' . $data['owner']['name'] . '</a></td>';
+                    } else {
                         echo '<td> <span class=\'label label-danger\'><i class=\'fa fa-times badge-danger\'></i></span> </td>';
                     }
-                    echo '<td><a target="_blank" href="https://facebook.com/'.$data['id'].'">Link</a>';
+                    echo '<td><a target="_blank" href="https://facebook.com/' . $data['id'] . '">Link</a>';
 
                     echo '</tr>';
                 }
@@ -727,7 +723,7 @@ class Facebook extends Controller
                         if (isset($data['id'])) {
                             $id = $data['id'];
                         }
-                        if(isset($data['picture'])){
+                        if (isset($data['picture'])) {
                             $picture = $data['picture']['data']['url'];
                         }
 
@@ -752,15 +748,14 @@ class Facebook extends Controller
                     }
 //                  check data if all are vailable
 
-                    echo '<td><img class="img-thumbnail" src="'.$picture.'"><br>'.'<a target="_blank" href="'.$link.'">'. $name.'</a></td>';
-                    echo '<td>'.$data['category'].'</td>';
-                    if($phone != ""){
-                        echo '<td>'.$phone.'</td>';
-                    }
-                    else{
+                    echo '<td><img class="img-thumbnail" src="' . $picture . '"><br>' . '<a target="_blank" href="' . $link . '">' . $name . '</a></td>';
+                    echo '<td>' . $data['category'] . '</td>';
+                    if ($phone != "") {
+                        echo '<td>' . $phone . '</td>';
+                    } else {
                         echo '<td> <span class=\'label label-danger\'><i class=\'fa fa-times badge-danger\'></i></span> </td>';
                     }
-                    echo '<td>'.$website.'</td>';
+                    echo '<td>' . $website . '</td>';
                     if (isset($location['country'])) {
                         foreach ($location as $field => $value) {
                             if ($field == 'latitude' || $field == 'longitude') {
@@ -777,17 +772,15 @@ class Facebook extends Controller
                     } else {
                         echo '<td>' . "<span class='label label-danger'><i class='fa fa-times badge-danger'></i></span>" . '</td>';
                     }
-                    if(isset($data['description'])){
-                        echo '<td>'.$data['description'].'</td>';
-                    }
-                    else{
+                    if (isset($data['description'])) {
+                        echo '<td>' . $data['description'] . '</td>';
+                    } else {
                         echo '<td> <span class=\'label label-danger\'><i class=\'fa fa-times badge-danger\'></i></span> </td>';
                     }
 
-                    if(isset($data['about'])){
-                        echo '<td>'.$data['about'].'</td>';
-                    }
-                    else{
+                    if (isset($data['about'])) {
+                        echo '<td>' . $data['about'] . '</td>';
+                    } else {
                         echo '<td> <span class=\'label label-danger\'><i class=\'fa fa-times badge-danger\'></i></span> </td>';
                     }
 

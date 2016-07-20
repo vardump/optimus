@@ -21,6 +21,7 @@ class Twitter extends Controller
         else{
             return redirect('/settings');
         }
+
         $consumerKey = Followers::get_value('twConKey');
         $consumerSecret = Followers::get_value('twConSec');
         $accessToken = Followers::get_value('twToken');

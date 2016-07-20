@@ -352,7 +352,7 @@
                         <div class="col-md-6">
                             <div class="row">
                                 <div class="form-group">
-                                    <img src="/img/logo.png" width="400" height="450" id="imgPreview">
+                                    <img src="/img/placeholder.png" width="400" height="450" id="imgPreview">
                                 </div>
                             </div>
                             <div class="row">

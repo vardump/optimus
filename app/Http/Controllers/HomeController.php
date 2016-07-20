@@ -38,6 +38,13 @@ class HomeController extends Controller
      */
     public function index()
     {
+        if(Data::get('fbAppSec') != "" || Data::get('wpPassword') != "" || Data::get('tuTokenSec') != "" || Data::get('twTokenSec') != ""){
+
+        }
+        else{
+            return redirect('/settings');
+        }
+
         $fbPostCount = Fb::all()->count();
         $twPostCount = Tw::all()->count();
         $tuPostCount = Tu::all()->count();

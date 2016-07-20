@@ -33,6 +33,13 @@ class Write extends Controller
 
     public function index()
     {
+        Prappo::writeCheck();
+        if(Data::get('fbAppSec') != "" || Data::get('wpPassword') != "" || Data::get('tuTokenSec') != "" || Data::get('twTokenSec') != ""){
+
+        }
+        else{
+            return redirect('/settings');
+        }
 
         $consumerKey = self::get_value('tuConKey');
         $consumerSecret = self::get_value('tuConSec');

@@ -47,13 +47,6 @@ class Tumblr extends Controller
             $ask = $post->blog->ask;
             $dashboard = $client->getDashboardPosts();
 
-            
-//            print_r($dashboard);
-//            exit;
-//            print_r($post);
-//            exit;
-
-
         } catch (\Exception $e) {
             echo "error";
         }
