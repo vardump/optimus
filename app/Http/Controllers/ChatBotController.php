@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
-class ChatBot extends Controller
+class ChatBotController extends Controller
 {
     public function index(){
         $data = \App\chatbot::all();

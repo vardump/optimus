@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class Facebook extends Controller
+class FacebookController extends Controller
 {
     public function index()
     {

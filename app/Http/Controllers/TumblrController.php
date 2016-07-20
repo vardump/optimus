@@ -10,7 +10,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Tumblr\API\Client;
 
-class Tumblr extends Controller
+class TumblrController extends Controller
 {
     public function index(){
         if(Setting::where('field','tuTokenSec')->exists()){

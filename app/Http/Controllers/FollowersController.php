@@ -8,7 +8,7 @@ use DB;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class Followers extends Controller
+class FollowersController extends Controller
 {
 
    public function index(){

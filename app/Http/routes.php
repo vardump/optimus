@@ -18,25 +18,21 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/settings/notifications', 'Settings@notifyIndex');
     Route::get('/reports', 'Reports@index');
 
-    Route::get('/followers', 'Followers@index');
-    Route::get('/gettwfoll', 'Followers@showTwFollowers');
-    Route::get('/showalltwfollowers', 'Followers@showAllTwFollowers');
-
-    Route::get('/satf', function () {
-        return view('showAllTwFollowers');
-    });
+    Route::get('/followers', 'FollowersController@index');
+    Route::get('/gettwfoll', 'FollowersController@showTwFollowers');
+    Route::get('/showalltwfollowers', 'FollowersController@showAllTwFollowers');
 
 //    dashboard activities
     Route::get('/fblikes', 'HomeController@fbLikes');
     Route::get('/twfollowers', 'HomeController@twFollowers');
     Route::get('/tufollowers', 'HomeController@tuFollowers');
 
-    Route::get('/allpost', 'allpost@index');
+    Route::get('/allpost', 'AllpostController@index');
 
-    Route::get('/facebook', 'Facebook@index');
-    Route::get('/twitter', 'Twitter@index');
-    Route::get('/tumblr', 'Tumblr@index');
-    Route::get('/wordpress', 'Wordpress@index');
+    Route::get('/facebook', 'FacebookController@index');
+    Route::get('/twitter', 'TwitterController@index');
+    Route::get('/tumblr', 'TumblrController@index');
+    Route::get('/wordpress', 'WordpressController@index');
 
     Route::post('/wpwrite', 'Write@wpWrite');
     Route::post('/twwrite', 'Write@twWrite');
@@ -55,14 +51,14 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('/skypesave','Settings@skypeSave');
 
     // deleting
-    Route::post('/fbdel', 'Facebook@fbDelete');
+    Route::post('/fbdel', 'FacebookController@fbDelete');
 
     // commenting
-    Route::post('/fbcom', 'Facebook@fbComment');
+    Route::post('/fbcom', 'FacebookController@fbComment');
 
     // editing 
 
-    Route::post('/fbedit', 'Facebook@fbEdit');
+    Route::post('/fbedit', 'FacebookController@fbEdit');
 //   delete twitter post
     Route::post('/twdel', 'Write@twDelete');
 //    delete tumblr post
@@ -80,13 +76,10 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('/sedit', 'ScheduleController@sedit');
 
     // reporting
-    Route::get('/fbreport', 'Facebook@fbReport');
+    Route::get('/fbreport', 'FacebookController@fbReport');
 
-    Route::get('test1', function () {
-        return view('test');
-    });
 
-    Route::get('/fbgroups', 'Facebook@fbGroupIndex');
+    Route::get('/fbgroups', 'FacebookController@fbGroupIndex');
     Route::get('/tusync', 'Settings@tuSync');
     Route::get('/fbmassgrouppost', 'MassFbGroup@index');
     Route::post('/savepublicgroup', 'MassFbGroup@saveGroup');
@@ -98,20 +91,20 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/ajaxchat/{pageId}/{cId}', 'Conversation@ajaxGetConversations');
     Route::post('/chat', 'Conversation@chat');
 
-    Route::get('/masssend/{pageId}', 'Facebook@massSend');
-    Route::get('/masssend', 'Facebook@massSendIndex');
-    Route::get('/massreplay/{pageId}', 'Facebook@massReplay');
+    Route::get('/masssend/{pageId}', 'FacebookController@massSend');
+    Route::get('/masssend', 'FacebookController@massSendIndex');
+    Route::get('/massreplay/{pageId}', 'FacebookController@massReplay');
 
-    Route::get('/chatbot', 'ChatBot@index');
-    Route::post('/addquestion', 'ChatBot@addQuestion');
-    Route::post('/delquestion', 'ChatBot@delQuestion');
+    Route::get('/chatbot', 'ChatBotController@index');
+    Route::post('/addquestion', 'ChatBotController@addQuestion');
+    Route::post('/delquestion', 'ChatBotController@delQuestion');
 
     Route::any('/hook', 'Hook@index');
     Route::get('/hook/test', 'Hook@test');
     Route::post('/langsave', 'Settings@lang');
 
     Route::get('/scraper', 'Scraper@index');
-    Route::post('/scraper', 'Facebook@scraper');
+    Route::post('/scraper', 'FacebookController@scraper');
 
 //    notifications
     Route::post('/notify', 'Notify@insert');

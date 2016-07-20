@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class Twitter extends Controller
+class TwitterController extends Controller
 {
     public function index(){
         if(Setting::where('field','twTokenSec')->exists()){
