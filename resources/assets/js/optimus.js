@@ -1299,6 +1299,29 @@ if(document.getElementById('settingspage')){
     });
 }
 
+
+if(document.getElementById('settingspage')){
+    $('#skypeSave').click(function(){
+        $.ajax({
+            type:'POST',
+            url:'/skypesave',
+            data:{
+                'skypeUser':$('#skypeUser').val(),
+                'skypePass':$('#skypePass').val()
+            },
+            success:function (data) {
+                if(data=='success'){
+                    swal('Success','Settings updated','success');
+
+                }
+                else{
+                    swal('Error',data,'error');
+                }
+            }
+        })
+    });
+}
+
 // if(document.getElementById('scraper')){
 //     $('#search').click(function () {
 //         $('#scraper').html("Please wait........");

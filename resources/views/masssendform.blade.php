@@ -35,7 +35,7 @@
                                         </button>
                                         <br><br>
                                         <p>
-                                            *You can send only who commented and made conversation with this page
+                                            *You can send only who already made conversation with this page
                                         </p>
                                     </div>
                                 </li>

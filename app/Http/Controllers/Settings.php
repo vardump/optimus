@@ -477,5 +477,16 @@ class Settings extends Controller
 
     }
 
+    public function skypeSave(Request $re){
+        try{
+            DB::table('settings')->where('field','skypeUser')->update(['value' => $re->skypeUser ]);
+            DB::table('settings')->where('field','skypePass')->update(['value' => $re->skypePass ]);
+            return "success";
+        }
+        catch (\Exception $e){
+            return $e->getMessage();
+        }
+    }
+
 
 }

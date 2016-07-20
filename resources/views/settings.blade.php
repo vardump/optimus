@@ -198,6 +198,7 @@
                     </div>
                 </div>
                 <div class="row">
+                    {{--keyboard settings --}}
                     <div class="col-md-6">
                         <div class="box box-primary">
                             <div class="box-header with-border" align="center">
@@ -219,6 +220,33 @@
 
                             <div class="box-footer">
                                 <button id="langSave" class="btn btn-primary">Save</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- skype settings--}}
+
+                    <div class="col-md-6">
+                        <div class="box box-primary">
+                            <div class="box-header with-border" align="center">
+                                <h3 class="box-title"><i class="fa fa-skype"></i> Skype Settings</h3>
+                            </div><!-- /.box-header -->
+                            <!-- form start -->
+
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <label for="skypeUser">Skype username</label>
+                                    <input class="form-control" type="text" id="skypeUser">
+                                </div>
+                                <div class="form-group">
+                                    <label for="skypePass">Skype password</label>
+                                    <input class="form-control" type="password" id="skypePass">
+                                </div>
+
+                            </div><!-- /.box-body -->
+
+                            <div class="box-footer">
+                                <button id="skypeSave" class="btn btn-primary">Save</button>
                             </div>
                         </div>
                     </div>

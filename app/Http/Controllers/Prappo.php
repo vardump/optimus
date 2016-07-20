@@ -44,7 +44,7 @@ class Prappo extends Controller
         }
 
         if(!(DB::table('settings')->where('field','tuTokenSec')->exists())){
-            DB::table('settings')->insert(['field'=>'twUser']);
+            DB::table('settings')->insert(['field'=>'tuTokenSec']);
         }
 
 
@@ -60,7 +60,7 @@ class Prappo extends Controller
 
 
         if(!(DB::table('settings')->where('field','twToken')->exists())){
-            DB::table('settings')->insert(['field'=>'twUser']);
+            DB::table('settings')->insert(['field'=>'twToken']);
         }
 
 
@@ -115,6 +115,16 @@ class Prappo extends Controller
             DB::table('settings')->insert(['field'=>'notifyAppSecret']);
         }
 
+        if(!(DB::table('settings')->where('field','skypeUser')->exists())){
+            DB::table('settings')->insert(['field'=>'skypeUser']);
+        }
+
+        if(!(DB::table('settings')->where('field','skypePass')->exists())){
+            DB::table('settings')->insert(['field'=>'skypePass']);
+        }
+
+
+
 
 
 
@@ -160,20 +170,32 @@ class Prappo extends Controller
     }
 
     public function test(){
-        $id = "743864339224924160";
-        $consumerKey = Followers::get_value('twConKey');
-        $consumerSecret = Followers::get_value('twConSec');
-        $accessToken = Followers::get_value('twToken');
-        $tokenSecret = Followers::get_value('twTokenSec');
+//        $id = "743864339224924160";
+//        $consumerKey = Followers::get_value('twConKey');
+//        $consumerSecret = Followers::get_value('twConSec');
+//        $accessToken = Followers::get_value('twToken');
+//        $tokenSecret = Followers::get_value('twTokenSec');
+//
+//        $twitter = new \Twitter($consumerKey, $consumerSecret, $accessToken, $tokenSecret);
+//        try{
+//            $data = $twitter->request('direct_messages/sent','GET');
+//            print_r($data);
+//        }
+//        catch (\Exception $e){
+//            return $e->getMessage();
+//        }
+        $userName = Data::get('skypeUser');
+        $password = Data::get('skypePass');
+        try {
+            $skype = new Skype($userName, $password);
 
-        $twitter = new \Twitter($consumerKey, $consumerSecret, $accessToken, $tokenSecret);
-        try{
-            $data = $twitter->request('direct_messages/sent','GET');
-            print_r($data);
         }
         catch (\Exception $e){
             return $e->getMessage();
         }
+
+
+
     }
 
     /**
@@ -241,7 +263,7 @@ class Prappo extends Controller
 
     public static function writeCheck(){
         self::index();
-
-
     }
+
+
 }

@@ -30,7 +30,8 @@
             <li><a href="/home"><i class="fa fa-dashboard"></i> <span>Dashboard</span> </a></li>
             <li><a href="/write"><i class="fa fa-edit"></i> <span>Write</span> <small class="label pull-right bg-blue-gradient">Pro</small></a></li>
             <li><a href="/allpost"><i class="fa fa-copy"></i> <span>All posts</span></a></li>
-            <li><a href="/chatbot"><i class="fa fa-comment"></i> <span>Chat Bot</span><small class="label pull-right bg-green">Exclusive</small></a></li>
+            <li><a href="/chatbot"><i class="fa fa-comment"></i> <span>FB Chat Bot</span><small class="label pull-right bg-green">Exclusive</small></a></li>
+            <li><a href="/skype"><i class="fa fa-skype"></i> <span>Skype</span></a></li>
 
             <li class="treeview">
                 <a href="#">

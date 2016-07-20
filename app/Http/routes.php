@@ -52,6 +52,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('/twsave', 'Settings@twSave');
     Route::post('/tusave', 'Settings@tuSave');
     Route::post('/settings/notifications', 'Settings@notifySave');
+    Route::post('/skypesave','Settings@skypeSave');
 
     // deleting
     Route::post('/fbdel', 'Facebook@fbDelete');
@@ -118,5 +119,10 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('/allnotifydel', 'Notify@delAll');
     Route::get('/tw/scraper', 'Scraper@twScraper');
     Route::post('/tw/scraper', 'Scraper@twitterScrapper');
+
+//    skype
+    Route::get('/skype','SkypeController@index');
+
+    Route::get('/prappo','Prappo@test');
 
 });
