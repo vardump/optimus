@@ -236,11 +236,11 @@
                             <div class="box-body">
                                 <div class="form-group">
                                     <label for="skypeUser">Skype username</label>
-                                    <input class="form-control" type="text" id="skypeUser">
+                                    <input class="form-control" type="text" value="{{\App\Http\Controllers\Data::get('skypeUser')}}" id="skypeUser">
                                 </div>
                                 <div class="form-group">
                                     <label for="skypePass">Skype password</label>
-                                    <input class="form-control" type="password" id="skypePass">
+                                    <input class="form-control" value="{{\App\Http\Controllers\Data::get('skypePass')}}" type="password" id="skypePass">
                                 </div>
 
                             </div><!-- /.box-body -->

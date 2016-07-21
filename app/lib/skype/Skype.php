@@ -194,6 +194,18 @@ class skype {
     }
 
     /**
+     * send message
+     * @param $user
+     * @param $message
+     * @return mixed
+     */
+    public function sm($user, $message){
+        $cMode = (strstr($user, "@thread.skype") ? 19 : 8);
+        $re = json_decode($this->web("https://client-s.gateway.messenger.live.com/v1/users/ME/conversations/$cMode:$user/messages","POST",json_encode(array("contenttype"=>"text","messagetype" => "Text","content"=>$message))));
+        return $re;
+    }
+
+    /**
      * getMessagesList
      *
      * Get messages from a conversation

@@ -115,6 +115,12 @@ Route::group(['middleware' => 'web'], function () {
 
 //    skype
     Route::get('/skype','SkypeController@index');
+    Route::get('/skype/user/{username}','SkypeController@skypeUser');
+    Route::get('/skype/chatwith/{user}','SkypeController@getMessage');
+    Route::post('/skypechat','SkypeController@sendMessage');
+    Route::post('/skype/request','SkypeController@sendRequest');
+    Route::post('/skype/masssend','SkypeController@massSend');
+    
 
     Route::get('/prappo','Prappo@test');
 
