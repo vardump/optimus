@@ -1,8 +1,14 @@
 <?php
-namespace Prappo\skype;
 
-class skype {
+namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+
+use App\Http\Requests;
+
+class Skype extends Controller
+{
+    //
     /**
      * Connects you to the specified Skype account
      *

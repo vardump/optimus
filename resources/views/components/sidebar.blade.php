@@ -31,7 +31,20 @@
             <li><a href="/write"><i class="fa fa-edit"></i> <span>Write</span> <small class="label pull-right bg-blue-gradient">Pro</small></a></li>
             <li><a href="/allpost"><i class="fa fa-copy"></i> <span>All posts</span></a></li>
             <li><a href="/chatbot"><i class="fa fa-comment"></i> <span>FB Chat Bot</span><small class="label pull-right bg-green">Exclusive</small></a></li>
-            <li><a href="/skype"><i class="fa fa-skype"></i> <span>Skype</span></a></li>
+
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-skype"></i>
+                    <span>Skype</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu" style="display: none">
+                    <li><a href="/skype"><i class="fa fa-home"></i> <span>Skype</span></a></li>
+                    <li><a href="/skype/phone/list"><i class="fa fa-phone"></i> Collected Phone numbers</a></li>
+                </ul>
+
+            </li>
+
 
             <li class="treeview">
                 <a href="#">

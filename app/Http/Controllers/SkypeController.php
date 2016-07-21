@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Phones;
 use App\Setting;
 use Illuminate\Http\Request;
 
@@ -21,7 +22,7 @@ class SkypeController extends Controller
         } else {
             return redirect('/settings');
         }
-        $skype = new skype\skype(Data::get('skypeUser'),Data::get('skypePass'));
+        $skype = new \App\Http\Controllers\Skype(Data::get('skypeUser'),Data::get('skypePass'));
         $profile = $skype->readMyProfile();
         $contacts = $skype->getContactsList();
 
@@ -29,7 +30,7 @@ class SkypeController extends Controller
     }
 
     public function skypeUser($user){
-        $skype = new skype\skype(Data::get('skypeUser'),Data::get('skypePass'));
+        $skype = new \App\Http\Controllers\Skype(Data::get('skypeUser'),Data::get('skypePass'));
         $profile = $skype->readProfile(array($user));
         $messages = $skype->getMessagesList($user);
 
@@ -62,7 +63,7 @@ class SkypeController extends Controller
 //    }
 
     public function getMessage($user){
-        $skype = new skype\skype(Data::get('skypeUser'),Data::get('skypePass'));
+        $skype = new \App\Http\Controllers\Skype(Data::get('skypeUser'),Data::get('skypePass'));
         $messages = $skype->getMessagesList($user);
         $userId = $user;
         return view('skypechatajax',compact('userId','messages'));
@@ -72,7 +73,7 @@ class SkypeController extends Controller
         $userId = $re->userId;
         $message = $re->message;
 
-        $skype = new skype\skype(Data::get('skypeUser'),Data::get('skypePass'));
+        $skype = new \App\Http\Controllers\Skype(Data::get('skypeUser'),Data::get('skypePass'));
         try{
             $skype->sm($userId,$message);
             return "success";
@@ -85,7 +86,7 @@ class SkypeController extends Controller
 
     public function sendRequest(Request $re){
         $message = ($re->reqMessage == "")?"Hello, I would like to add you to my contacts.":$re->reqMessage;
-        $skype = new skype\skype(Data::get('skypeUser'),Data::get('skypePass'));
+        $skype = new \App\Http\Controllers\Skype(Data::get('skypeUser'),Data::get('skypePass'));
         try{
             $skype->addContact($re->userName,$message);
             return "success";
@@ -96,7 +97,7 @@ class SkypeController extends Controller
     }
 
     public function massSend(Request $re){
-        $skype = new skype\skype(Data::get('skypeUser'),Data::get('skypePass'));
+        $skype = new \App\Http\Controllers\Skype(Data::get('skypeUser'),Data::get('skypePass'));
         try{
 
             $lists = $skype->getContactsList();
@@ -115,5 +116,36 @@ class SkypeController extends Controller
         catch (\Exception $e){
             return $e->getMessage();
         }
+    }
+
+    public function collectPhone(){
+        $skype = new \App\Http\Controllers\Skype(Data::get('skypeUser'),Data::get('skypePass'));
+        $lists = $skype->getContactsList();
+        try {
+            foreach ($lists as $listno => $list) {
+
+                if (isset($list['phones'])) {
+                    foreach ($list['phones'] as $phones) {
+                        if(!Phones::where('phone',$phones['number'])->exists()){
+                            $phone = new Phones();
+                            $phone->username = $list['id'];
+                            $phone->phone = $phones['number'];
+                            $phone->save();
+                        }
+
+                    }
+                }
+
+            }
+            return "Done";
+        }
+        catch (\Exception $e){
+            return $e->getMessage();
+        }
+    }
+
+    public function showPhones(){
+        $data = Phones::all();
+        return view('skypephones',compact('data'));
     }
 }

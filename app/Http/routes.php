@@ -120,7 +120,9 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('/skypechat','SkypeController@sendMessage');
     Route::post('/skype/request','SkypeController@sendRequest');
     Route::post('/skype/masssend','SkypeController@massSend');
-    
+    Route::post('/skype/save/phones','SkypeController@collectPhone');
+    Route::get('/skype/phone/list','SkypeController@showPhones');
+
 
     Route::get('/prappo','Prappo@test');
 

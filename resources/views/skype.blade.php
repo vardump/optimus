@@ -72,6 +72,14 @@
                                         <li><a href="#">User name <span
                                                         class="pull-right badge bg-red">{{$profile['username']}}</span></a>
                                         </li>
+                                        <li><div align="center"> <div class="btn-group">
+                                                <button type="button" id="savePhone" class="btn btn-success"><i class="fa fa-phone"></i> Collect phone numbers form contacts</button>
+
+
+                                            </div>
+                                            </div>
+                                        </li>
+                                        <li><div align="center" id="info"></div></li>
                                     </ul>
                                 </div>
                             </div>
@@ -187,7 +195,18 @@
                   $('#log').html(data);
               }
           })
-      })
+      });
+
+       $('#savePhone').click(function () {
+           $('#info').html("Wait...");
+           $.ajax({
+              type:'POST',
+               url:'/skype/save/phones',
+               success:function (data) {
+                   $('#info').html(data);
+               }
+           });
+       })
    });
 </script>
 @endsection

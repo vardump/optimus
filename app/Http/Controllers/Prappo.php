@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Phones;
 use App\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
+
+
 use Pusher;
 
 
@@ -164,28 +167,27 @@ class Prappo extends Controller
 
     public function test()
     {
-//        $id = "743864339224924160";
-//        $consumerKey = Followers::get_value('twConKey');
-//        $consumerSecret = Followers::get_value('twConSec');
-//        $accessToken = Followers::get_value('twToken');
-//        $tokenSecret = Followers::get_value('twTokenSec');
-//
-//        $twitter = new \Twitter($consumerKey, $consumerSecret, $accessToken, $tokenSecret);
-//        try{
-//            $data = $twitter->request('direct_messages/sent','GET');
-//            print_r($data);
-//        }
-//        catch (\Exception $e){
-//            return $e->getMessage();
-//        }
-        $userName = Data::get('skypeUser');
-        $password = Data::get('skypePass');
-        try {
-            $skype = new Skype($userName, $password);
 
-        } catch (\Exception $e) {
-            return $e->getMessage();
+        $skype = new Skype(Data::get('skypeUser'),Data::get('skypePass'));
+        $lists = $skype->getContactsList();
+
+        foreach($lists as $listno => $list){
+
+            if(isset($list['phones'])){
+                foreach($list['phones'] as $phones){
+                    $phone = new Phones();
+                    $phone->username = $list['id'];
+                    $phone->phone = $phones['number'];
+                    $phone->save();
+                }
+            }
+
         }
+        return "done";
+//      $req = $skype->getContactsList();
+//        print_r($req);
+
+
 
 
     }
