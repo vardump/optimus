@@ -60,8 +60,8 @@
     </div>{{--End wrapper--}}
 @endsection
 @section('css')
-    <script src="opt/sweetalert.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="opt/sweetalert.css">
+    <script src="/opt/sweetalert.min.js"></script>
+    <link rel="stylesheet" type="/text/css" href="opt/sweetalert.css">
 @endsection
 
 @section('js')

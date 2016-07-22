@@ -63,6 +63,10 @@ class HomeController extends Controller
         return view('home',compact('fbPostCount','twPostCount','tuPostCount','wpPostCount','fbgCount','fbPageCount','allPost','fbPages','fbGroups','tuBlogs','schedules','logs','user'));
     }
 
+    /**
+     * @return string
+     * get facebook likes
+     */
     public function fbLikes(){
     try {
         $likes = new Settings();
@@ -76,6 +80,10 @@ class HomeController extends Controller
     }
 
 
+    /**
+     * @return string
+     * get total twitter followers
+     */
     public function twFollowers(){
         try{
 
@@ -87,6 +95,10 @@ class HomeController extends Controller
         }
     }
 
+    /**
+     * @return string
+     * get total tumblr followers
+     */
     public function tuFollowers(){
         try{
             $tuFollowers = Followers::tuFollowers();

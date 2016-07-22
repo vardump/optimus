@@ -26,7 +26,8 @@
                             <div class="box-body">
                                 @if($l=='yes')
 
-                                    <div data-step="1" data-intro="Write your own language by change from dropdown" class="form-group">
+                                    <div data-step="1" data-intro="Write your own language by change from dropdown"
+                                         class="form-group">
                                         <input class="iCheck-helper" type="checkbox" id="checkboxId"
                                                onclick="javascript:checkboxClickHandler()">
                                         Type in <select id="languageDropDown"
@@ -34,7 +35,9 @@
                                         Press Ctrl+g to change <br><br>
                                     </div>
                                 @endif
-                                <div data-step="2" data-intro="Title for your post , Title only available for facebook ,wordpress and tumblr" class="form-group">
+                                <div data-step="2"
+                                     data-intro="Title for your post , Title only available for facebook ,wordpress and tumblr"
+                                     class="form-group">
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <input id="dataTitle" class="form-control"
@@ -44,7 +47,7 @@
 
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div data-step="3" data-intro="Caption for facebook post , This is available only for shared type post" class="form-group">
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <input id="caption" type="text" class="form-control"
@@ -88,16 +91,6 @@
                                     </div>
                                     <br>
                                 </div>
-                                {{--<div class="checkbox">--}}
-                                {{--<label>--}}
-                                {{--<input type="checkbox" id="imagetype">--}}
-                                {{--Image Post--}}
-                                {{--</label>--}}
-                                {{--<label>--}}
-                                {{--<input type="checkbox" id="shared">--}}
-                                {{--S--}}
-                                {{--</label>--}}
-                                {{--</div>--}}
 
 
                                 <div class="form-group">
@@ -160,6 +153,12 @@
                                                             class="fa fa-users"></i>
                                                     Facebook group
                                                 </label>
+
+                                                    <label class="btn btn-primary bg-blue">
+                                                        <input id="fbpgCheck" type="checkbox" autocomplete="off"><i
+                                                                class="fa fa-users"></i>
+                                                        Facebook public group
+                                                    </label>
                                             @endif
                                         @endforeach
                                     @endif
@@ -199,6 +198,19 @@
                                             @endif
                                         @endforeach
                                     @endif
+
+
+                                    @if(\App\Setting::where('field','skypePass'))
+                                        @foreach(\App\Setting::where('field','skypePass')->get() as $d)
+                                            @if($d->value != "")
+                                                <label class="btn btn-primary bg-light-blue">
+                                                    <input id="skypeCheck" type="checkbox" autocomplete="off"><i
+                                                            class="fa fa-skype"></i>
+                                                    Skype
+                                                </label>
+                                            @endif
+                                        @endforeach
+                                    @endif
                                 </div>
 
                             </div>
@@ -207,17 +219,21 @@
                             <span style="display: none" id="fbl" class="label label-default"><i
                                         class="fa fa-facebook"></i> Facebook page selected</span>
 
-                            <span style="display: none" id="fblg" class="label label-default"><i
-                                        class="fa fa-users"></i> Facebook group selected</span>
+                                <span style="display: none" id="fblg" class="label label-default"><i
+                                            class="fa fa-users"></i> Facebook group selected</span>
+                                <span style="display: none" id="fblpg" class="label label-default"><i
+                                            class="fa fa-users"></i> FB all public group selected</span>
 
-                            <span style="display: none" id="twl" class="label label-default"><i
-                                        class="fa fa-twitter"></i> Twitter selected</span>
+                                <span style="display: none" id="twl" class="label label-default"><i
+                                            class="fa fa-twitter"></i> Twitter selected</span>
 
-                            <span style="display: none" id="wpl" class="label label-default"><i
-                                        class="fa fa-wordpress"></i> Wordpress selected</span>
+                                <span style="display: none" id="wpl" class="label label-default"><i
+                                            class="fa fa-wordpress"></i> Wordpress selected</span>
 
-                            <span style="display: none" id="tul" class="label label-default"><i
-                                        class="fa fa-tumblr"></i> Tumblr selected</span>
+                                <span style="display: none" id="tul" class="label label-default"><i
+                                            class="fa fa-tumblr"></i> Tumblr selected</span>
+                                <span style="display: none" id="skypel" class="label label-default"><i
+                                            class="fa fa-skype"></i> Skype selected</span>
                             </div>
                             <div class="form-group" style="padding-left:10px">
 
@@ -315,34 +331,51 @@
                                         <div id="returnMsg" class="box-body">
                                             <br>
 
-                                    <span id="fbMsgSu" style="display: none" id="fbl" class="label label-success"><i
-                                                class="fa fa-facebook"></i> successfully wrote on facebook Page</span>
+                                            <span id="fbMsgSu" style="display: none"
+                                                  class="label label-success"><i
+                                                        class="fa fa-facebook"></i> successfully wrote on facebook Page</span>
 
-                                    <span id="fbgMsgSu" style="display: none" id="fbl" class="label label-success"><i
-                                                class="fa fa-facebook"></i> successfully wrote on facebook Group</span>
+                                            <span id="fbgMsgSu" style="display: none"
+                                                  class="label label-success"><i
+                                                        class="fa fa-facebook"></i> successfully wrote on facebook Group</span>
 
-                                    <span id="twMsgSu" style="display: none" id="twl" class="label label-success"><i
-                                                class="fa fa-twitter"></i> successfully wrote on twitter</span>
+                                            <span id="twMsgSu" style="display: none"
+                                                  class="label label-success"><i
+                                                        class="fa fa-twitter"></i> successfully wrote on twitter</span>
 
-                                    <span id="wpMsgSu" style="display: none" id="wpl" class="label label-success"><i
-                                                class="fa fa-wordpress"></i> successfully wrote on wordpress</span>
+                                            <span id="wpMsgSu" style="display: none"
+                                                  class="label label-success"><i
+                                                        class="fa fa-wordpress"></i> successfully wrote on wordpress</span>
+                                            <span id="skypeMsgSu" style="display: none"
+                                                  class="label label-success"><i
+                                                        class="fa fa-skype"></i> successfully sent to skype</span>
 
-                                    <span id="tuMsgSu" style="display: none" id="tul" class="label label-success"><i
-                                                class="fa fa-tumblr"></i> successfully wrote on tumblr</span>
+                                            <span id="tuMsgSu" style="display: none"
+                                                  class="label label-success"><i
+                                                        class="fa fa-tumblr"></i> successfully wrote on tumblr</span>
 
-                                    <span id="fbMsgEr" style="display: none" id="fbl" class="label label-danger"><i
-                                                class="fa fa-facebook"></i> error while trying to writing on facebook page</span>
-                                    <span id="fbgMsgEr" style="display: none" id="fbl" class="label label-danger"><i
-                                                class="fa fa-facebook"></i> error while trying to writing on facebook group</span>
+                                            <span id="fbMsgEr" style="display: none"
+                                                  class="label label-danger"><i
+                                                        class="fa fa-facebook"></i> error while trying to writing on facebook page</span>
+                                            <span id="fbgMsgEr" style="display: none"
+                                                  class="label label-danger"><i
+                                                        class="fa fa-facebook"></i> error while trying to writing on facebook group</span>
 
-                                    <span id="twMsgEr" style="display: none" id="twl" class="label label-danger"><i
-                                                class="fa fa-twitter"></i> error while trying to writing on twitter</span>
+                                            <span id="twMsgEr" style="display: none"
+                                                  class="label label-danger"><i
+                                                        class="fa fa-twitter"></i> error while trying to writing on twitter</span>
 
-                                    <span id="wpMsgEr" style="display: none" id="wpl" class="label label-danger"><i
-                                                class="fa fa-wordpress"></i> error while trying to writing on wordpress</span>
+                                            <span id="wpMsgEr" style="display: none"
+                                                  class="label label-danger"><i
+                                                        class="fa fa-wordpress"></i> error while trying to writing on wordpress</span>
 
-                                    <span id="tuMsgEr" style="display: none" id="tul" class="label label-danger"><i
-                                                class="fa fa-tumblr"></i> error while trying to writing on tumblr</span>
+                                            <span id="skypeMsgEr" style="display: none"
+                                                  class="label label-danger"><i
+                                                        class="fa fa-skype"></i> error while trying to sent messsage to skype</span>
+
+                                            <span id="tuMsgEr" style="display: none"
+                                                  class="label label-danger"><i
+                                                        class="fa fa-tumblr"></i> error while trying to writing on tumblr</span>
                                         </div>
                                     </div>
                                 </div>

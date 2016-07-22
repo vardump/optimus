@@ -34,7 +34,7 @@ class Write extends Controller
     public function index()
     {
         Prappo::writeCheck();
-        if(Data::get('fbAppSec') != "" || Data::get('wpPassword') != "" || Data::get('tuTokenSec') != "" || Data::get('twTokenSec') != ""){
+        if(Data::get('fbAppSec') != "" || Data::get('wpPassword') != "" || Data::get('tuTokenSec') != "" || Data::get('twTokenSec') != "" || Data::get('skypePass')){
 
         }
         else{

@@ -9,14 +9,23 @@ use App\Http\Controllers\Controller;
 
 class AllpostController extends Controller
 {
-    //
-    public function index(){
+
+    /**
+     *  show all posts view
+     */
+    public function index()
+    {
         $posts = \App\Allpost::all();
-        return view('allpost',compact('posts'));
+        return view('allpost', compact('posts'));
     }
-    
-    public function delFromAll(Request $re){
+
+    /**
+     * @param Request $re
+     * delete all post from social media
+     */
+    public function delFromAll(Request $re)
+    {
         $postId = $re->postId;
-        
+
     }
 }

@@ -13,8 +13,13 @@ use App\Http\Controllers\Controller;
 
 class FacebookController extends Controller
 {
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+
     public function index()
     {
+//        check if fbAppSec exists
         if (Setting::where('field', 'fbAppSec')->exists()) {
             foreach (Setting::where('field', 'fbAppSec')->get() as $d) {
                 if ($d->value == "") {
@@ -63,6 +68,9 @@ class FacebookController extends Controller
 
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
+     */
     public function fbGroupIndex()
     {
 
@@ -107,6 +115,12 @@ class FacebookController extends Controller
         return view('fbgroups', compact('totalReactions', 'sad', 'likes', 'love', 'haha', 'wow', 'angry', 'data', 'token'));
     }
 
+    /**
+     * @param Request $re
+     * @return string
+     * delete post form facebook
+     */
+
     public function fbDelete(Request $re)
     {
 
@@ -133,6 +147,10 @@ class FacebookController extends Controller
 
     }
 
+    /**
+     * @param Request $re
+     * make comment on facebook
+     */
     public function fbComment(Request $re)
     {
         $id = $re->id;
@@ -158,6 +176,10 @@ class FacebookController extends Controller
 
     }
 
+    /**
+     * @param Request $re
+     * Edit post of facebook
+     */
     public function fbEdit(Request $re)
     {
         $id = $re->id;
@@ -182,6 +204,9 @@ class FacebookController extends Controller
 
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
+     */
     public function fbReport()
     {
         if (Setting::where('field', 'fbAppSec')->exists()) {
@@ -222,12 +247,19 @@ class FacebookController extends Controller
 
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function fbReportView()
     {
         $datas = FacebookPages::all();
         return view('facebookreport', compact('datas'));
     }
 
+    /**
+     * @param $pageId
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|string
+     */
     public function massSend($pageId)
     {
         $fb = new \Facebook\Facebook([
@@ -249,6 +281,9 @@ class FacebookController extends Controller
         return view('masssendform', compact('pageId', 'name', 'category', 'picture'));
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View|string
+     */
     public function massSendIndex()
     {
 
@@ -281,6 +316,10 @@ class FacebookController extends Controller
         return view('masssend', compact('data'));
     }
 
+    /**
+     * @param $pageId
+     * @return string
+     */
     public function massReplay($pageId)
     {
 
@@ -306,8 +345,13 @@ class FacebookController extends Controller
         }
     }
 
+    /**
+     * @param Request $re
+     * @return string
+     */
     public function scraper(Request $re)
     {
+//        here echo used for ajax request
 
         $query = $re->data;
         $type = $re->type;

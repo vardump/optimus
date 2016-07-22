@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Input;
 
 class ImageUpload extends Controller
 {
+    /**
+     * @param Request $re
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function iup(Request $re){
         $file = $re->file('file');
         $fileName = date('YmdHis');

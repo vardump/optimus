@@ -194,7 +194,7 @@
 
                     <div class="col-sm-2 col-xs-6">
                         <div class="description-block">
-                            <span class="description-percentage text-yellow"><i class="fa fa-twitter"></i></span>
+                            <span class="description-percentage text-yellow"><i class="fa fa-facebook"></i></span>
                             <h2 class="description-header">{{$fbgCount}}</h2>
                             <span class="description-text">Facebook Group Post</span>
                         </div>

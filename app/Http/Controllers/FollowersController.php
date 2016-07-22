@@ -11,7 +11,10 @@ use App\Http\Controllers\Controller;
 class FollowersController extends Controller
 {
 
-   public function index(){
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
+     */
+    public function index(){
        set_time_limit(120);
        if(Setting::where('field','twTokenSec')->exists()){
            foreach (Setting::where('field','twAppToken')->get() as $d){
@@ -56,6 +59,9 @@ class FollowersController extends Controller
         }
     }
 
+    /**
+     * @return string
+     */
     public static function tuFollowers(){
         $blogName = self::get_value('tuDefBlog');
 
@@ -78,12 +84,18 @@ class FollowersController extends Controller
     }
 
 
-
+    /**
+     * @param $field
+     * @return mixed
+     */
     public static function get_value($field)
     {
         return DB::table('settings')->where('field', $field)->value('value');
     }
 
+    /**
+     * show few twitter followers
+     */
     public function showTwFollowers(){
 
         set_time_limit(120);
@@ -114,6 +126,9 @@ class FollowersController extends Controller
 
     }
 
+    /**
+     * show all twitter followers
+     */
     public function showAllTwFollowers(){
 
         set_time_limit(120);

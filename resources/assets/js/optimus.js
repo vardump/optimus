@@ -82,6 +82,29 @@ $("#wpCheck").change(function () {
     }
 });
 
+$("#skypeCheck").change(function () {
+    if (this.checked) {
+        $('#skypel').show(400);
+        count = count + 1;
+    }
+    else {
+        $('#skypel').hide(400);
+        count = count - 1;
+    }
+});
+
+
+$("#wpCheck").change(function () {
+    if (this.checked) {
+        $('#wpl').show(400);
+        count = count + 1;
+    }
+    else {
+        $('#wpl').hide(400);
+        count = count - 1;
+    }
+});
+
 $("#tuCheck").change(function () {
     if (this.checked) {
         $('#tul').show(400);
@@ -95,6 +118,8 @@ $("#tuCheck").change(function () {
         $('#tuBlog').hide(400);
     }
 });
+
+
 
 $('#write').click(function () {
 
@@ -1464,3 +1489,8 @@ if(document.getElementById('allnotify')){
         });
     });
 }
+
+// intro current page
+$('#intro').click(function () {
+    introJs().start();
+})

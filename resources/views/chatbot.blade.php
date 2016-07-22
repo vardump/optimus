@@ -75,6 +75,10 @@
 
 
                     </div>
+                    <div class="col-md-6" align="center">
+                        <img height="250" width="250" src="/img/optmessenger.png">
+                        <h3>Optimus Prime Facebook chat bot</h3>
+                    </div>
                 </div>
             </section>
         </div>

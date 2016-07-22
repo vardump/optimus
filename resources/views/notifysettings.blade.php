@@ -29,7 +29,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="appSec">Tumblr Token</label>
+                                    <label for="appSec">Pusher App Secreate</label>
                                     <input class="form-control" value="{{$appSec}}" id="appSec"
                                            placeholder="Pusher App Secret"
                                            type="text">

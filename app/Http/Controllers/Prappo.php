@@ -10,12 +10,14 @@ use Illuminate\Support\Facades\Input;
 
 
 use Pusher;
+use Registration;
+use WhatsProt;
 
 
 class Prappo extends Controller
 {
     /**
-     *
+     * insert settings information into database
      */
     public static function index()
     {
@@ -165,32 +167,6 @@ class Prappo extends Controller
 
     }
 
-    public function test()
-    {
-
-        $skype = new Skype(Data::get('skypeUser'),Data::get('skypePass'));
-        $lists = $skype->getContactsList();
-
-        foreach($lists as $listno => $list){
-
-            if(isset($list['phones'])){
-                foreach($list['phones'] as $phones){
-                    $phone = new Phones();
-                    $phone->username = $list['id'];
-                    $phone->phone = $phones['number'];
-                    $phone->save();
-                }
-            }
-
-        }
-        return "done";
-//      $req = $skype->getContactsList();
-//        print_r($req);
-
-
-
-
-    }
 
     /**
      * @param $string
@@ -229,6 +205,9 @@ class Prappo extends Controller
         $pusher->trigger('optimus', 'my_event', $data);
     }
 
+    /**
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public static function tuCheck()
     {
         if (Setting::where('field', 'tuTokenSec')->exists()) {
@@ -242,6 +221,9 @@ class Prappo extends Controller
         }
     }
 
+    /**
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public static function twCheck()
     {
         if (Setting::where('field', 'twTokenSec')->exists()) {
@@ -256,11 +238,18 @@ class Prappo extends Controller
 
     }
 
+    /**
+     *
+     */
     public static function writeCheck()
     {
         self::index();
     }
 
+    /**
+     * @param $link
+     * @return mixed
+     */
     public static function getSkypeName($link)
     {
         $content = $link;
@@ -269,6 +258,10 @@ class Prappo extends Controller
 
     }
 
+    /**
+     * @param $user
+     * @return string
+     */
     public static function getSkypeImg($user){
         return 'https://api.skype.com/users/' . $user . '/profile/avatar';
     }

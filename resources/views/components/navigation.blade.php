@@ -16,8 +16,17 @@
         <!-- Navbar Right Menu -->
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
+                <li class="dropdown messages-menu">
+
+                    <a id="intro" href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-question"></i>
+                        Help
+                    </a>
+
+                </li>
                 <!-- Messages: style can be found in dropdown.less-->
                 <li class="dropdown messages-menu">
+
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-envelope-o"></i>
                         <span class="label label-success">{{\App\Notify::where('type','message')->count()}}</span>

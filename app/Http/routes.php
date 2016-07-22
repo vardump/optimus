@@ -126,4 +126,6 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('/prappo','Prappo@test');
 
+    Route::get('/profile','ProfileController@index');
+
 });

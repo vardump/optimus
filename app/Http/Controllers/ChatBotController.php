@@ -8,34 +8,49 @@ use App\Http\Requests;
 
 class ChatBotController extends Controller
 {
-    public function index(){
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function index()
+    {
         $data = \App\chatbot::all();
-        return view('chatbot',compact('data'));
+        return view('chatbot', compact('data'));
     }
 
-    public function addQuestion(Request $re){
+    /**
+     * @param Request $re
+     * @return string
+     */
+    public function addQuestion(Request $re)
+    {
+        /** @var string $question */
         $question = $re->question;
+        /** @var string $answer */
         $answer = $re->answer;
 
-        try{
+        try {
             $data = new \App\chatbot();
             $data->question = $question;
             $data->answer = $answer;
             $data->save();
             return "success";
-        }
-        catch (\Exception $e){
+        } catch (\Exception $e) {
             return $e->getMessage();
         }
     }
 
-    public function delQuestion(Request $re){
+    /**
+     * @param Request $re
+     * @return string
+     */
+    public function delQuestion(Request $re)
+    {
+        /** @var int $id */
         $id = $re->id;
-        try{
-            \App\chatbot::where('id',$id)->delete();
+        try {
+            \App\chatbot::where('id', $id)->delete();
             return "success";
-        }
-        catch (\Exception $e){
+        } catch (\Exception $e) {
             return $e->getMessage();
         }
     }
