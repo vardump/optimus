@@ -476,6 +476,7 @@ class Write extends Controller
 
     public function fbWrite(Request $re)
     {
+
         $config = new Settings();
         $postId = $re->postId;
         $pageId = $re->pageId;
@@ -486,7 +487,7 @@ class Write extends Controller
 
 
         $imageUrl = url('').'/uploads/'.$imageName;
-//        $imageUrl = "https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png";
+
         
         $link = $re->link;
         $caption = $re->caption;
@@ -565,9 +566,7 @@ class Write extends Controller
 
             try {
                 $content = [
-                    "message" => $re->data,
-                    "source" => $fb->fileToUpload(public_path()."/uploads/".$imageName),
-                    "caption" => $caption
+                    "message" => $re->data
                 ];
                 $post = $fb->post($pageId . "/feed", $content, $accessToken);
                 if (isset($postId)) {

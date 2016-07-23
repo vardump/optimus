@@ -96,8 +96,7 @@
                                 <div class="form-group">
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="r" id="imagetype" value="imagetype"
-                                                   checked="">
+                                            <input type="radio" name="r" id="imagetype" value="imagetype" checked="checked">
                                             Image Post
                                         </label>
                                     </div>
@@ -109,7 +108,7 @@
                                     </div>
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="r" id="texttype" value="texttype">
+                                            <input type="radio" name="r" id="texttype" value="texttype" >
                                             Text Only
                                         </label>
                                     </div>
@@ -154,11 +153,7 @@
                                                     Facebook group
                                                 </label>
 
-                                                    <label class="btn btn-primary bg-blue">
-                                                        <input id="fbpgCheck" type="checkbox" autocomplete="off"><i
-                                                                class="fa fa-users"></i>
-                                                        Facebook public group
-                                                    </label>
+
                                             @endif
                                         @endforeach
                                     @endif

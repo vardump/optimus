@@ -148,4 +148,25 @@ class SkypeController extends Controller
         $data = Phones::all();
         return view('skypephones',compact('data'));
     }
+
+    public function del(Request $re){
+
+        try{
+            Phones::where('id',$re->id)->delete();
+            return "success";
+        }
+        catch (\Exception $e){
+            return $e->getMessage();
+        }
+    }
+
+    public function delAll(){
+        try{
+            Phones::truncate();
+            return "success";
+        }
+        catch (\Exception $e){
+            return $e->getMessage();
+        }
+    }
 }

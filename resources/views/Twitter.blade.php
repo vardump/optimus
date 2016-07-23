@@ -58,7 +58,7 @@
                                 <li class="active"><a href="#activity" data-toggle="tab">Home</a></li>
                                 <li><a href="#replies" data-toggle="tab">Replies</a></li>
                                 <li><a href="#me" data-toggle="tab">Me</a></li>
-                                <li><a href="#write" data-toggle="tab">Write</a></li>
+
 
                             </ul>
                             <div class="tab-content">
@@ -233,20 +233,7 @@
                                 </div>
 
                                 {{--my activities end--}}
-                                <div class="tab-pane" id="write">
-                                    <div class="form-group">
-                                        <form id="uploadimage" method="post" enctype="multipart/form-data">
-                                            <label>Select Your Image</label><br/>
-                                            <input type="file" name="file" id="file"/>
-                                            <input type="submit" value="Upload" id="imgUploadBtn"/>
-                                            <input type="hidden" id="image">
-                                            <div id="imgMsg"></div>
-                                        </form>
-                                <textarea class="form-control" rows="4" id="status"
-                                          placeholder="Type here ..."></textarea><br>
-                                        <button class="btn btn-primary" id="twWrite">Post now</button>
-                                    </div>
-                                </div><!-- /.tab-pane -->
+                                <!-- /.tab-pane -->
                             </div><!-- /.tab-content -->
                         </div><!-- /.nav-tabs-custom -->
                     </div><!-- /.col -->

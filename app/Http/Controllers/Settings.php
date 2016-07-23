@@ -49,33 +49,29 @@ class Settings extends Controller
         $fbAppSec = DB::table('settings')->where('field', 'fbAppSec')->value('value');
         $fbToken = DB::table('settings')->where('field', 'fbAppToken')->value('value');
 
-        try{
+        try {
             $fb = new Facebook([
                 'app_id' => $fbAppId,
                 'app_secret' => $fbAppSec,
                 'default_graph_version' => 'v2.6',
             ]);
-        }
-        catch (\Exception $g){
+        } catch (\Exception $g) {
 
         }
 
-        try{
-            $permissions = ['user_managed_groups', 'pages_messaging', 'publish_actions', 'manage_pages', 'publish_pages', 'email', 'user_likes', 'public_profile', 'user_about_me', 'user_posts', 'publish_actions','ads_management','pages_manage_cta','read_page_mailboxes','pages_show_list','rsvp_event','user_events','pages_manage_instant_articles','user_actions.books','user_actions.fitness','user_actions.music','user_actions.news','user_actions.video','read_audience_network_insights','read_custom_friendlists','read_insights','user_status','user_religion_politics','user_hometown','user_location','user_photos','user_relationship_details','user_relationships']; // optional
+        try {
+            $permissions = ['user_managed_groups', 'pages_messaging', 'publish_actions', 'manage_pages', 'publish_pages', 'email', 'user_likes', 'public_profile', 'user_about_me', 'user_posts', 'publish_actions', 'ads_management', 'pages_manage_cta', 'read_page_mailboxes', 'pages_show_list', 'rsvp_event', 'user_events', 'pages_manage_instant_articles', 'user_actions.books', 'user_actions.fitness', 'user_actions.music', 'user_actions.news', 'user_actions.video', 'read_audience_network_insights', 'read_custom_friendlists', 'read_insights', 'user_status', 'user_religion_politics', 'user_hometown', 'user_location', 'user_photos', 'user_relationship_details', 'user_relationships']; // optional
             $helper = $fb->getRedirectLoginHelper();
-            $loginUrl = $helper->getLoginUrl(url('').'/fbconnect', $permissions);
-        }
-        catch (\Exception $e){
+            $loginUrl = $helper->getLoginUrl(url('') . '/fbconnect', $permissions);
+        } catch (\Exception $e) {
             $helper = url('/');
             $loginUrl = url('/');
         }
 
 
-
-        try{
+        try {
             $fbPages = FacebookPages::all();
-        }
-        catch (\Exception $h){
+        } catch (\Exception $h) {
             $fbPages = "none";
         }
 
@@ -83,12 +79,12 @@ class Settings extends Controller
         // get tumblr blogs
 
         $tuBlogs = TuBlogs::all();
-        $getLang = Setting::where('field','lang')->get();
-        foreach ($getLang as $lang){
+        $getLang = Setting::where('field', 'lang')->get();
+        foreach ($getLang as $lang) {
             $l = $lang->value;
         }
 
-        return view('settings', compact('l','twUser', 'tuDefBlog', 'wpUser', 'wpPassword', 'wpUrl', 'twConKey', 'twConSec', 'twToken', 'twTokenSec', 'tuConKey', 'tuConSec', 'tuToken', 'tuTokenSec', 'fbAppId', 'fbAppSec', 'fbToken', 'loginUrl', 'fbPages', 'tuBlogs'));
+        return view('settings', compact('l', 'twUser', 'tuDefBlog', 'wpUser', 'wpPassword', 'wpUrl', 'twConKey', 'twConSec', 'twToken', 'twTokenSec', 'tuConKey', 'tuConSec', 'tuToken', 'tuTokenSec', 'fbAppId', 'fbAppSec', 'fbToken', 'loginUrl', 'fbPages', 'tuBlogs'));
     }
 
     public function wpSave(Request $re)
@@ -206,7 +202,6 @@ class Settings extends Controller
 
         return redirect('settings');
 
-//        return view('connectionsuccess',compact('msg','accessToken'));
 
     }
 
@@ -217,51 +212,6 @@ class Settings extends Controller
 
     public function test()
     {
-//        $fb = new Facebook([
-//            'app_id' => $this->config('fbAppId'),
-//            'app_secret' => $this->config('fbAppSec'),
-//            'default_graph_version' => 'v2.6',
-//        ]);
-//
-//        $linkData = [
-//
-//            'message' => 'just for fun'
-//        ];
-//
-//        try {
-//            // Returns a `Facebook\FacebookResponse` object
-////          $response = $fb->post('/me/feed', $linkData, $this->config('fbAppToken'));
-//            $response = $fb->get('me/accounts', $this->config('fbAppToken'));
-//            $body = $response->getBody();
-//
-//
-////            print_r("<pre>".var_dump($body)."</pre>");
-//
-//            $data = json_decode($body, true);
-//
-//            foreach ($data['data'] as $no => $filed) {
-////                foreach($filed as $key => $value){
-////                    return "(*)".$key . " : ";
-////                    print_r($value);
-////                    return "\n==============================\n";
-//////                    return $key ."\n";
-////
-////                }
-//
-//                return "Id : " . $filed['id'] . "<br>";
-//                return "name : " . $filed['name'] . "<br>";
-//                return "access toekn : " . $filed['access_token'] . "<br>";
-//
-//            }
-//
-//        } catch (FacebookResponseException $e) {
-//            return 'Graph returned an error: ' . $e->getMessage();
-//            exit;
-//        } catch (FacebookSDKException $e) {
-//            return 'Facebook SDK returned an error: ' . $e->getMessage();
-//            exit;
-//
-//        }
 
         $this->saveFbPages();
 
@@ -284,21 +234,17 @@ class Settings extends Controller
             $data = json_decode($body, true);
 
             foreach ($data['data'] as $no => $filed) {
-                $pages = FacebookPages::where('pageId', $filed['id'])->first();
-                $facebookPages = new FacebookPages();
-                if (empty($pages)) {
-                    if (!FacebookPages::where('pageId', $filed['id'])->exists()) {
-                        $facebookPages->pageId = $filed['id'];
-                        $facebookPages->pageName = $filed['name'];
-                        $facebookPages->pageToken = $filed['access_token'];
-                        $facebookPages->save();
-                    }
 
+                $facebookPages = new FacebookPages();
+                if (!FacebookPages::where('pageId', $filed['id'])->exists()) {
+                    $facebookPages->pageId = $filed['id'];
+                    $facebookPages->pageName = $filed['name'];
+                    $facebookPages->pageToken = $filed['access_token'];
+                    $facebookPages->save();
 
                 } else {
                     FacebookPages::where('pageId', $filed['id'])->update(['pageToken' => $filed['access_token']]);
                 }
-                return $filed['name'] . "<br>";
 
             }
 
@@ -437,13 +383,13 @@ class Settings extends Controller
         return redirect('settings');
     }
 
-    public function lang(Request $re){
+    public function lang(Request $re)
+    {
         $value = $re->value;
-        try{
-            Setting::where('field','lang')->update(['value'=>$value]);
+        try {
+            Setting::where('field', 'lang')->update(['value' => $value]);
             return "success";
-        }
-        catch (\Exception $e){
+        } catch (\Exception $e) {
             return $e->getMessage();
         }
     }
@@ -452,11 +398,12 @@ class Settings extends Controller
      * notifications settings
      * pusher notification
      */
-    public function notifyIndex(){
+    public function notifyIndex()
+    {
         $appId = Data::get('notifyAppId');
         $appKey = Data::get('notifyAppKey');
         $appSec = Data::get('notifyAppSecret');
-        return view('notifysettings',compact('appId','appKey','appSec'));
+        return view('notifysettings', compact('appId', 'appKey', 'appSec'));
     }
 
     /**
@@ -465,25 +412,24 @@ class Settings extends Controller
      */
     public function notifySave(Request $re)
     {
-        try{
+        try {
             DB::table('settings')->where('field', 'notifyAppId')->update(['value' => $re->appId]);
             DB::table('settings')->where('field', 'notifyAppKey')->update(['value' => $re->appKey]);
             DB::table('settings')->where('field', 'notifyAppSecret')->update(['value' => $re->appSec]);
             return "success";
-        }
-        catch (\Exception $e){
+        } catch (\Exception $e) {
             return $e->getMessage();
         }
 
     }
 
-    public function skypeSave(Request $re){
-        try{
-            DB::table('settings')->where('field','skypeUser')->update(['value' => $re->skypeUser ]);
-            DB::table('settings')->where('field','skypePass')->update(['value' => $re->skypePass ]);
+    public function skypeSave(Request $re)
+    {
+        try {
+            DB::table('settings')->where('field', 'skypeUser')->update(['value' => $re->skypeUser]);
+            DB::table('settings')->where('field', 'skypePass')->update(['value' => $re->skypePass]);
             return "success";
-        }
-        catch (\Exception $e){
+        } catch (\Exception $e) {
             return $e->getMessage();
         }
     }

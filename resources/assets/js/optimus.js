@@ -1494,3 +1494,74 @@ if(document.getElementById('allnotify')){
 $('#intro').click(function () {
     introJs().start();
 })
+
+// delete skype saved phone number
+if(document.getElementById('skypephone')){
+    $('.btn.btn-danger.btn-xs').click(function () {
+        var id = $(this).attr('data-id');
+
+        swal({
+            title: "Are you sure?",
+            text: "Do you want to delete phone number ? You will not be able to recover this !",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes, delete it!",
+            closeOnConfirm: false
+        }, function () {
+            $.ajax({
+                type: 'POST',
+                url: '/skype/phone/del',
+                data: {
+                    'id':id
+                },
+                success: function (data) {
+                    if (data == 'success') {
+                        swal("Done!", "Deleted successfully !", "success")
+                        location.reload();
+                    }
+                    else {
+                        swal("Error", data, "error");
+                    }
+
+                }
+            });
+
+        });
+    });
+
+    $('#delall').click(function () {
+
+        swal({
+            title: "Are you sure?",
+            text: "Do you want to delete all phone number ? You will not be able to recover this !",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes, delete all!",
+            closeOnConfirm: false
+        }, function () {
+            $.ajax({
+                type: 'POST',
+                url: '/skype/phone/del/all',
+                data: {
+
+                },
+                success: function (data) {
+                    if (data == 'success') {
+                        swal("Done!", "Deleted successfully !", "success")
+                        location.reload();
+                    }
+                    else {
+                        swal("Error", data, "error");
+                    }
+
+                }
+            });
+
+        });
+
+    });
+
+
+}

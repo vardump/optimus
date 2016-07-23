@@ -12,7 +12,8 @@
                     <div class="box-header">
                         <h3 class="box-title">Collected phone numbers <label
                                     class="badge">{{\App\Phones::all()->count()}}</label></h3>
-                        <button class="btn btn-warning btn-xs"><i class="fa fa-database"></i> Delete all numbers
+                        <button id="delall" class="btn btn-warning btn-xs"><i class="fa fa-database"></i> Delete all
+                            numbers
                         </button>
                     </div>
                     <div class="box-body">
@@ -32,12 +33,11 @@
                                     <td>{{$post->id}}</td>
                                     <td>{{$post->username}}</td>
                                     <td>{{$post->phone}}</td>
-
-
                                     <td align="center">
                                         <button data-id="{{$post->id}}" class="btn btn-danger btn-xs"><i
                                                     class="fa fa-trash"></i> Delete
                                         </button>
+
                                     </td>
                                 </tr>
                             @endforeach
@@ -48,6 +48,7 @@
                                 <th>ID</th>
                                 <th>User Name</th>
                                 <th>Phone number</th>
+
                                 <th>Action</th>
                             </tr>
                             </tfoot>
@@ -61,9 +62,10 @@
 @endsection
 @section('css')
     <script src="/opt/sweetalert.min.js"></script>
-    <link rel="stylesheet" type="/text/css" href="opt/sweetalert.css">
+    <link rel="stylesheet" type="text/css" href="/opt/sweetalert.css">
 @endsection
-
 @section('js')
+<script>
 
+</script>
 @endsection

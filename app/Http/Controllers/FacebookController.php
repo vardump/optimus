@@ -46,7 +46,7 @@ class FacebookController extends Controller
             'default_graph_version' => 'v2.6',
         ]);
         $getPage = FacebookPages::where('pageId', $defPage)->first();
-        $pageToken = $getPage->pageToken;
+//        $pageToken = $getPage->pageToken;
         try {
 
             $response = $fb->get('me/?fields=accounts{access_token,id,name,picture,fan_count,feed.limit(10){id,created_time,message,with_tags,from{id,name,picture},link,comments{id,message,comments,from{id,name,picture},created_time},reactions{type}}}', Data::get('fbAppToken'));

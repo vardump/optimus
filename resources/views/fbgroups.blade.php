@@ -53,7 +53,7 @@
                                     </span>
                                                         <span class='description'><a
                                                                     href="http://facebook.com/{{$content['id']}}"
-                                                                    target="_blank"> {{\App\Http\Controllers\Op::date($content['created_time'])}}</a></span>
+                                                                    target="_blank"> {{\App\Http\Controllers\Prappo::date($content['created_time'])}}</a></span>
                                                     </div><!-- /.user-block -->
                                                     <p>
                                                         <!-- feed section start -->
@@ -152,7 +152,7 @@
                                                         </span>
                                                                         <span class='description'><a
                                                                                     href="http://facebook.com/{{$com['id']}}"
-                                                                                    target="_blank"> {{\App\Http\Controllers\Op::date($com['created_time'])}}</a></span>
+                                                                                    target="_blank"> {{\App\Http\Controllers\Prappo::date($com['created_time'])}}</a></span>
                                                                     </div><!-- /.user-block -->
                                                                     <p>
                                                                         {{$com['message']}}
@@ -179,7 +179,7 @@
                                                                         </span>
                                                                                     <span class='description'><a
                                                                                                 href="http://facebook.com/{{$subCom['id']}}"
-                                                                                                target="_blank">{{\App\Http\Controllers\Op::date($subCom['created_time'])}}</a> </span>
+                                                                                                target="_blank">{{\App\Http\Controllers\Prappo::date($subCom['created_time'])}}</a> </span>
                                                                                 </div><!-- /.user-block -->
                                                                                 <p>
                                                                                     {{$subCom['message']}}

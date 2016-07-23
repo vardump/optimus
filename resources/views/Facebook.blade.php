@@ -99,20 +99,22 @@
                     <div class="col-md-8">
                         <div class="nav-tabs-custom">
                             <ul class="nav nav-tabs">
-                                <li class="active"><a href="#write" data-toggle="tab"><i
-                                                class="fa fa-pencil-square"></i> Write</a></li>
+
                                 {{--fetching page names --}}
+                                <?php $tabCount = 0;?>
                                 @foreach($data['accounts']['data'] as $pageNo => $pageData)
-                                    <li><a href="#{{ $pageData['id'] }}" data-toggle="tab">{{ $pageData['name'] }}</a>
+                                    <li @if($tabCount==0) class="active" @endif><a href="#{{ $pageData['id'] }}" data-toggle="tab">{{ $pageData['name'] }}</a>
                                     </li>
+                                    <?php $tabCount++;?>
                                 @endforeach
 
 
                             </ul>
                             <div class="tab-content">
+                                <?php $tabPaneCount = 0;?>
                                 {{--loop for tabs according to facebook pages--}}
                                 @foreach($data['accounts']['data'] as $pageNo => $pageData)
-                                    <div class="tab-pane" id="{{ $pageData['id'] }}">
+                                    <div class="@if($tabPaneCount == 0)active @endif tab-pane" id="{{ $pageData['id'] }}">
                                         <!-- Post -->
                                         {{--loop for feeds of pages--}}
                                         @foreach($pageData['feed']['data'] as $contentNo => $content)
@@ -139,7 +141,7 @@
                                     </span>
                                                         <span class='description'><a
                                                                     href="http://facebook.com/{{$content['id']}}"
-                                                                    target="_blank"> {{\App\Http\Controllers\Op::date($content['created_time'])}}</a></span>
+                                                                    target="_blank"> {{\App\Http\Controllers\Prappo::date($content['created_time'])}}</a></span>
                                                     </div><!-- /.user-block -->
                                                     <p>
                                                         <!-- feed section start -->
@@ -184,19 +186,25 @@
                                                         @endforeach
 
                                                     @endif
-                                                    <div style="padding-left: 10px" class="row">
+                                                    <div id="emotions" style="padding-left: 10px" class="row">
                                                         {{--@if($likes > 0)--}}
-                                                        <img src="img/likesmall.gif">{{$likes}}
+                                                        {{--<img src="img/likesmall.gif">--}}
+                                                        👍{{$likes}}
                                                         {{--@elseif($love>0)--}}
-                                                        <img src="img/lovesmall.gif">{{$love}}
+                                                        {{--<img src="img/lovesmall.gif">--}}
+                                                        ♥{{$love}}
                                                         {{--@elseif($haha>0)--}}
-                                                        <img src="img/hahasmall.gif">{{$haha}}
+                                                        {{--<img src="img/hahasmall.gif">--}}
+                                                        😂{{$haha}}
                                                         {{--@elseif($wow>0)--}}
-                                                        <img src="img/wowsmall.gif">{{$wow}}
+                                                        {{--<img src="img/wowsmall.gif">--}}
+                                                        😳{{$wow}}
                                                         {{--@elseif($sad>0)--}}
-                                                        <img src="img/sadsmall.gif">{{$sad}}
+                                                        {{--<img src="img/sadsmall.gif">--}}
+                                                        😢{{$sad}}
                                                         {{--@elseif($angry>0)--}}
-                                                        <img src="img/angrysmall.gif">{{ $angry }}
+                                                        {{--<img src="img/angrysmall.gif">--}}
+                                                        😡{{ $angry }}
 
                                                         {{--@endif--}}
 
@@ -238,7 +246,7 @@
                                                         </span>
                                                                         <span class='description'><a
                                                                                     href="http://facebook.com/{{$com['id']}}"
-                                                                                    target="_blank"> {{\App\Http\Controllers\Op::date($com['created_time'])}}</a></span>
+                                                                                    target="_blank"> {{\App\Http\Controllers\Prappo::date($com['created_time'])}}</a></span>
                                                                     </div><!-- /.user-block -->
                                                                     <p>
                                                                         {{$com['message']}}
@@ -265,7 +273,7 @@
                                                                         </span>
                                                                                     <span class='description'><a
                                                                                                 href="http://facebook.com/{{$subCom['id']}}"
-                                                                                                target="_blank">{{\App\Http\Controllers\Op::date($subCom['created_time'])}}</a> </span>
+                                                                                                target="_blank">{{\App\Http\Controllers\Prappo::date($subCom['created_time'])}}</a> </span>
                                                                                 </div><!-- /.user-block -->
                                                                                 <p>
                                                                                     {{$subCom['message']}}
@@ -328,37 +336,9 @@
 
 
                                     </div><!-- /.tab-pane -->
+                                <?php $tabPaneCount++;?>
                                 @endforeach
-                                <div class="active tab-pane" id="write">
-                                    <div class="form-group">
-                                        <input type="text" placeholder="Title" id="dataTitle" class="form-control">
-                                        <input type="text" placeholder="Caption" id="caption" class="form-control">
-                                        <input type="text" placeholder="Link" id="Link" class="form-control">
-
-                                        <input type="text" placeholder="Description" id="description"
-                                               class="form-control">
-                                        <form id="uploadimage" method="post" enctype="multipart/form-data">
-                                            <label>Select Your Image</label><br/>
-                                            <input type="file" name="file" id="file"/>
-                                            <input type="submit" value="Upload" id="imgUploadBtn"/>
-                                            <input type="hidden" id="image">
-                                            <div id="imgMsg"></div>
-                                        </form>
-
-                                        <input type="checkbox" id="imagetype"> Image Post
-                                <textarea class="form-control" rows="4" id="status"
-                                          placeholder="Type here ..."></textarea><br>
-                                        <div id="fbPages" class="form-group">
-                                            <select id="fbPages">
-                                                @foreach($fbPages as $fb)
-                                                    <option id="{{$fb->pageId}}"
-                                                            value="{{$fb->pageToken}}">{{$fb->pageName}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <button class="btn btn-primary" id="fbwrite">Post now</button>
-                                    </div>
-                                </div><!-- /.tab-pane -->
+                                <!-- /.tab-pane -->
 
 
                             </div><!-- /.tab-content -->
@@ -383,6 +363,6 @@
 @endsection
 
 @section('css')
-    <script src="opt/sweetalert.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="opt/sweetalert.css">
+    <script src="/opt/sweetalert.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/opt/sweetalert.css">
 @endsection

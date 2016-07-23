@@ -26,6 +26,10 @@
     {{--custom css--}}
     <link rel="stylesheet" href="/opt/css/custom.css">
     <link rel="stylesheet" href="/opt/intro/introjs.css">
+    <link rel="stylesheet" href="/opt/emoji/css/minEmoji.css">
+
+
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -49,16 +53,20 @@
 <script src="http://cdn.datatables.net/buttons/1.2.1/js/buttons.html5.min.js"></script>
 <script src="http://cdn.datatables.net/buttons/1.2.1/js/buttons.print.min.js"></script>
 <script src="/opt/intro/intro.js"></script>
+<script src="/opt/emoji/js/jMinEmoji.js"></script>
 
 <script src="https://js.pusher.com/3.1/pusher.min.js"></script>
+
 <script>
     // notification start
 
+    $(function () {
+        $('body').minEmoji();
+    });
     document.addEventListener('DOMContentLoaded', function () {
         if (Notification.permission !== "granted")
             Notification.requestPermission();
     });
-
 
 
     // notification end
@@ -69,60 +77,60 @@
     var pusher = new Pusher('{{\App\Http\Controllers\Data::get('notifyAppKey')}}', {
         encrypted: true
     });
-
+            @if(\App\Http\Controllers\Data::get('notifyAppSecret') != "")
     var channel = pusher.subscribe('optimus');
-    channel.bind('my_event', function(data) {
-        if(data.type == "message"){
-            notify(messengericon(),data.title,data.message,data.url);
+    channel.bind('my_event', function (data) {
+        if (data.type == "message") {
+            notify(messengericon(), data.title, data.message, data.url);
             $.ajax({
-               type:'POST',
-                url:'/notify',
-                data:{
-                   'img':messengericon(),
-                    'title':data.title,
-                    'body':data.message,
-                    'url':data.url,
-                    'type':data.type,
-                    'time':data.time
+                type: 'POST',
+                url: '/notify',
+                data: {
+                    'img': messengericon(),
+                    'title': data.title,
+                    'body': data.message,
+                    'url': data.url,
+                    'type': data.type,
+                    'time': data.time
                 },
-                success:function (data) {
+                success: function (data) {
                     console.log(data);
                 }
             });
         }
-        else if(data.type == "schedule"){
-            notify(optscheduleicon(),data.title,data.message,data.url);
+        else if (data.type == "schedule") {
+            notify(optscheduleicon(), data.title, data.message, data.url);
             $.ajax({
-                type:'POST',
-                url:'/notify',
-                data:{
-                    'img':optscheduleicon(),
-                    'title':data.title,
-                    'body':data.message,
-                    'url':data.url,
-                    'type':data.type,
-                    'time':data.time
+                type: 'POST',
+                url: '/notify',
+                data: {
+                    'img': optscheduleicon(),
+                    'title': data.title,
+                    'body': data.message,
+                    'url': data.url,
+                    'type': data.type,
+                    'time': data.time
                 },
-                success:function (data) {
+                success: function (data) {
                     console.log(data);
                 }
             });
 
         }
-        else if(data.type == "fbnotify"){
-            notify(optfbicon(),data.title,data.message,data.url);
+        else if (data.type == "fbnotify") {
+            notify(optfbicon(), data.title, data.message, data.url);
             $.ajax({
-                type:'POST',
-                url:'/notify',
-                data:{
-                    'img':optfbicon(),
-                    'title':data.title,
-                    'body':data.message,
-                    'url':data.url,
-                    'type':data.type,
-                    'time':data.time
+                type: 'POST',
+                url: '/notify',
+                data: {
+                    'img': optfbicon(),
+                    'title': data.title,
+                    'body': data.message,
+                    'url': data.url,
+                    'type': data.type,
+                    'time': data.time
                 },
-                success:function (data) {
+                success: function (data) {
                     console.log(data);
                 }
             });
@@ -130,13 +138,14 @@
         }
 
     });
+    @endif
 </script>
 @yield('js')
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
 
 
-        var table = $('#mytable').DataTable( {
+        var table = $('#mytable').DataTable({
 
             dom: '<""flB>tip',
             buttons: [
@@ -157,10 +166,10 @@
                     text: '<button class="btn btn-default btn-xs fak"><i class="fa fa-print"></i> Print all</button>'
                 },
             ]
-        } );
+        });
 
 
-    } );
+    });
 </script>
 </body>
 </html>
