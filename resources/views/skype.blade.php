@@ -8,6 +8,7 @@
         <div class="content-wrapper">
             <section class="content">
                 <div class="row">
+                    <div id="skype"></div>
                     <div class="col-md-5">
                         <!-- USERS LIST -->
                         <div class="box box-primary">

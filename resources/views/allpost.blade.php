@@ -12,7 +12,7 @@
                     <div class="box-header">
                         <h3 class="box-title">All articles and availability <label
                                     class="badge">{{\App\Allpost::all()->count()}}</label></h3>
-                        <button class="btn btn-warning btn-xs"><i class="fa fa-database"></i> Delete all from database
+                        <button id="delall" class="btn btn-danger btn-xs"><i class="fa fa-database"></i> Delete all from database
                         </button>
                     </div>
                     <div class="box-body">

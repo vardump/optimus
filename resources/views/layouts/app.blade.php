@@ -35,15 +35,10 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <style>
-        .emotionbdge{
-            position: absolute;
-            top: -3px;
-            right: -10px;
-            font-size: 10px;
-            font-weight: 400;
-        }
-    </style>
+
+    {{--emoji --}}
+    <link rel="stylesheet" href="/opt/emoji/emojionearea.min.css">
+
     @yield('css')
 </head>
 <body class="hold-transition sidebar-mini skin-red-light">
@@ -60,12 +55,25 @@
 <script src="http://cdn.datatables.net/buttons/1.2.1/js/buttons.html5.min.js"></script>
 <script src="http://cdn.datatables.net/buttons/1.2.1/js/buttons.print.min.js"></script>
 <script src="/opt/intro/intro.js"></script>
-
+<script type="text/javascript" src="/opt/emoji/emojionearea.min.js"></script>
 
 
 <script src="https://js.pusher.com/3.1/pusher.min.js"></script>
 
 <script>
+    {{--emoji start--}}
+     $(document).ready(function() {
+         if(document.getElementById('status')){
+             $("#status").emojioneArea();
+         }
+//        if(document.getElementById('facebookpage')){
+//            $(".input-sm").emojioneArea();
+//        }
+
+        if(document.getElementById('skype')){
+            $("#message").emojioneArea();
+        }
+    });
     // notification start
 
 

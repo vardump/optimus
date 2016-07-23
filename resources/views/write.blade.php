@@ -24,19 +24,19 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="box-body">
-                                @if($l=='yes')
+                                {{--@if($l=='yes')--}}
 
-                                    <div data-step="1" data-intro="Write your own language by change from dropdown"
-                                         class="form-group">
-                                        <input class="iCheck-helper" type="checkbox" id="checkboxId"
-                                               onclick="javascript:checkboxClickHandler()">
-                                        Type in <select id="languageDropDown"
-                                                        onchange="javascript:languageChangeHandler()"></select>
-                                        Press Ctrl+g to change <br><br>
-                                    </div>
-                                @endif
-                                <div data-step="2"
-                                     data-intro="Title for your post , Title only available for facebook ,wordpress and tumblr"
+                                {{--<div data-step="1" data-intro="Write your own language by change from dropdown"--}}
+                                {{--class="form-group">--}}
+                                {{--<input class="iCheck-helper" type="checkbox" id="checkboxId"--}}
+                                {{--onclick="javascript:checkboxClickHandler()">--}}
+                                {{--Type in <select id="languageDropDown"--}}
+                                {{--onchange="javascript:languageChangeHandler()"></select>--}}
+                                {{--Press Ctrl+g to change <br><br>--}}
+                                {{--</div>--}}
+                                {{--@endif--}}
+                                <div data-step="1"
+                                     data-intro="Title for your post , Title only available for <h1>facebook</h1> ,wordpress and tumblr"
                                      class="form-group">
                                     <div class="row">
                                         <div class="col-sm-12">
@@ -47,7 +47,9 @@
 
                                     </div>
                                 </div>
-                                <div data-step="3" data-intro="Caption for facebook post , This is available only for shared type post" class="form-group">
+                                <div data-step="2"
+                                     data-intro="Caption for facebook post , This is available only for shared type post"
+                                     class="form-group">
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <input id="caption" type="text" class="form-control"
@@ -96,7 +98,7 @@
                                 <div class="form-group">
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="r" id="imagetype" value="imagetype" checked="checked">
+                                            <input type="radio" name="r" id="imagetype" value="imagetype">
                                             Image Post
                                         </label>
                                     </div>
@@ -108,27 +110,21 @@
                                     </div>
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="r" id="texttype" value="texttype" >
+                                            <input type="radio" name="r" id="texttype" value="texttype"
+                                                   checked="checked">
                                             Text Only
                                         </label>
                                     </div>
 
                                 </div>
                                 <div class="form-group">
+                                    <inpu type="text" data-emojiable="true" data-emoji-input="unicode">
                             <textarea class="form-control" rows="4"
                                       id="status"
                                       placeholder="Type your content here ..."></textarea>
                                 </div>
-                                <div class="form-group">
-                                    <div class="form-control">
-                                        <span>Count : </span><span id="twcount" class="label label-primary">0</span>
-                                        <span id="wmsg1" class="label label-warning">..</span>
-                                        <span id="msg"></span>
 
-                                    </div>
 
-                                    <input type="hidden" id="postId">
-                                </div>
                             </div>
                             <div style="padding-left: 10px" class="form-group">
                                 <div class="btn-group btn-group-xs" data-toggle="buttons">

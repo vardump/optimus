@@ -999,6 +999,34 @@ if (document.getElementById('allpost')) {
         });
 
     });
+    $('#delall').click(function () {
+        swal({
+            title: "Are you sure?",
+            text: "You will not be able to recover this Data!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes, delete all!",
+            closeOnConfirm: false
+        }, function () {
+            $.ajax({
+                type: 'POST',
+                url: 'delallpost',
+                data: {
+                },
+                success: function (data) {
+                    if (data == 'success') {
+                        swal("Deleted!", "Your all post have been deleted.", "success");
+                        location.reload();
+                    }
+                    else {
+                        swal('Error!', data, 'error');
+                    }
+                }
+            });
+
+        });
+    })
 }
 
 // wordpress page specific

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Allpost;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -26,6 +27,16 @@ class AllpostController extends Controller
     public function delFromAll(Request $re)
     {
         $postId = $re->postId;
+
+    }
+
+    public function delAll(){
+        try{
+            Allpost::truncate();
+            return "success";
+        }catch (\Exception $e){
+            return $e->getMessage();
+        }
 
     }
 }

@@ -41,6 +41,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('/tuwrite', 'Write@tuWrite');
     Route::post('/postwrite', 'Write@postWrite');
     Route::post('/delpost', 'Write@delPost');
+    Route::post('/delallpost','AllpostController@delAll');
 
     //update settings
     Route::post('/wpsave', 'Settings@wpSave');

@@ -199,31 +199,7 @@
                 </div>
                 <div class="row">
                     {{--keyboard settings --}}
-                    <div class="col-md-6">
-                        <div class="box box-primary">
-                            <div class="box-header with-border" align="center">
-                                <h3 class="box-title"><i class="fa fa-language"></i> Multi language keyboard</h3>
-                            </div><!-- /.box-header -->
-                            <!-- form start -->
-
-                            <div class="box-body">
-                                <div class="form-group">
-                                    <label for="keyboard">Do you want to use multi language keyboard</label>
-                                    <select id="langOp" class="form-control">
-                                        <option value="yes" @if($l=='yes')selected @endif>Yes</option>
-                                        <option value="no" @if($l=='no') selected @endif>No</option>
-                                    </select>
-                                </div>
-
-
-                            </div><!-- /.box-body -->
-
-                            <div class="box-footer">
-                                <button id="langSave" class="btn btn-primary">Save</button>
-                            </div>
-                        </div>
-                    </div>
-
+                    
                     {{-- skype settings--}}
 
                     <div class="col-md-6">

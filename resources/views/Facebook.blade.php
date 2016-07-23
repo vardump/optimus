@@ -7,7 +7,7 @@
 
         <div class="content-wrapper">
             <section class="content">
-
+            <div id="facebookpage"></div>
                 <div class="row">
                     <div class="col-md-4">
 
@@ -319,7 +319,7 @@
                                                     <div class="form-horizontal">
                                                         <div class="form-group margin-bottom-none">
                                                             <div class="col-sm-12">
-                                                                <input class="form-control input-sm"
+                                                                <input id="commentBox" class="form-control input-sm"
                                                                        data-id="{{$content['id']}}"
                                                                        data-token="{{$pageData['access_token']}}"
                                                                        placeholder="Comment">
