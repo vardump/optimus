@@ -188,23 +188,23 @@
                                                     @endif
                                                     <div id="emotions" style="padding-left: 10px" class="row">
                                                         {{--@if($likes > 0)--}}
-                                                        {{--<img src="img/likesmall.gif">--}}
-                                                        👍{{$likes}}
+                                                        <img src="img/likesmall.gif">
+                                                        {{$likes}}</span>
                                                         {{--@elseif($love>0)--}}
-                                                        {{--<img src="img/lovesmall.gif">--}}
-                                                        ♥{{$love}}
+                                                        <img src="img/lovesmall.gif">
+                                                        {{$love}}
                                                         {{--@elseif($haha>0)--}}
-                                                        {{--<img src="img/hahasmall.gif">--}}
-                                                        😂{{$haha}}
+                                                        <img src="img/hahasmall.gif">
+                                                        {{$haha}}
                                                         {{--@elseif($wow>0)--}}
-                                                        {{--<img src="img/wowsmall.gif">--}}
-                                                        😳{{$wow}}
+                                                        <img src="img/wowsmall.gif">
+                                                        {{$wow}}
                                                         {{--@elseif($sad>0)--}}
-                                                        {{--<img src="img/sadsmall.gif">--}}
-                                                        😢{{$sad}}
+                                                        <img src="img/sadsmall.gif">
+                                                        {{$sad}}
                                                         {{--@elseif($angry>0)--}}
-                                                        {{--<img src="img/angrysmall.gif">--}}
-                                                        😡{{ $angry }}
+                                                        <img src="img/angrysmall.gif">
+                                                        {{ $angry }}
 
                                                         {{--@endif--}}
 

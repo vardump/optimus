@@ -87,7 +87,7 @@ class HomeController extends Controller
     public function twFollowers(){
         try{
 
-            $twFollowers = Followers::twFollowers();
+            $twFollowers = FollowersController::twFollowers();
             return $twFollowers;
         }
         catch(\Exception $e){
@@ -101,7 +101,7 @@ class HomeController extends Controller
      */
     public function tuFollowers(){
         try{
-            $tuFollowers = Followers::tuFollowers();
+            $tuFollowers = FollowersController::tuFollowers();
             return $tuFollowers;
         }
         catch(\Exception $e){

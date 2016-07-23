@@ -26,7 +26,6 @@
     {{--custom css--}}
     <link rel="stylesheet" href="/opt/css/custom.css">
     <link rel="stylesheet" href="/opt/intro/introjs.css">
-    <link rel="stylesheet" href="/opt/emoji/css/minEmoji.css">
 
 
 
@@ -36,7 +35,15 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+    <style>
+        .emotionbdge{
+            position: absolute;
+            top: -3px;
+            right: -10px;
+            font-size: 10px;
+            font-weight: 400;
+        }
+    </style>
     @yield('css')
 </head>
 <body class="hold-transition sidebar-mini skin-red-light">
@@ -53,16 +60,15 @@
 <script src="http://cdn.datatables.net/buttons/1.2.1/js/buttons.html5.min.js"></script>
 <script src="http://cdn.datatables.net/buttons/1.2.1/js/buttons.print.min.js"></script>
 <script src="/opt/intro/intro.js"></script>
-<script src="/opt/emoji/js/jMinEmoji.js"></script>
+
+
 
 <script src="https://js.pusher.com/3.1/pusher.min.js"></script>
 
 <script>
     // notification start
 
-    $(function () {
-        $('body').minEmoji();
-    });
+
     document.addEventListener('DOMContentLoaded', function () {
         if (Notification.permission !== "granted")
             Notification.requestPermission();
