@@ -39,7 +39,8 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('/fbwrite', 'Write@fbWrite');
     Route::post('/fbgwrite', 'Write@fbgwrite');
     Route::post('/tuwrite', 'Write@tuWrite');
-    Route::post('/postwrite', 'Write@postWrite');
+    Route::post('/post/save','Write@postSave');
+
     Route::post('/delpost', 'Write@delPost');
     Route::post('/delallpost','AllpostController@delAll');
 
@@ -84,7 +85,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/tusync', 'Settings@tuSync');
     Route::get('/fbmassgrouppost', 'MassFbGroup@index');
     Route::post('/savepublicgroup', 'MassFbGroup@saveGroup');
-    Route::post('/postomassgroup', 'MassFbGroup@massPost');
+    Route::post('/posttomassgroup', 'MassFbGroup@massPost');
 
     Route::get('/conversations', 'Conversation@index');
     Route::get('/conversations/{pageId}', 'Conversation@getConversations');

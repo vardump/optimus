@@ -524,6 +524,7 @@ class Write extends Controller
                     $fbPost = new Fb();
                     $fbPost->postId = $postId;
                     $fbPost->fbId = $id['id'];
+                    $fbPost->pageId = $pageId;
                     $fbPost->save();
                 }
                 return "success";
@@ -1001,8 +1002,21 @@ class Write extends Controller
 
     public function postSave(Request $re)
     {
-        $data = $re->data;
-        echo $data;
+
+        $content = $re->data;
+        $title = $re->title;
+        $postId = $re->postId;
+        try{
+            $add = new Allpost();
+            $add->title = $title;
+            $add->content = $content;
+            $add->postId = $postId;
+            $add->save();
+            return "success";
+        }
+        catch (\Exception $e){
+            return $e->getMessage();
+        }
     }
 
     public function addSchedule(Request $re){

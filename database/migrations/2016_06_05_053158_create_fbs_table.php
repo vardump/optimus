@@ -16,6 +16,7 @@ class CreateFbsTable extends Migration
             $table->increments('id');
             $table->string('postId');
             $table->string('fbId');
+            $table->string('pageId');
             $table->timestamps();
         });
     }

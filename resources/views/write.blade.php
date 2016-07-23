@@ -118,7 +118,7 @@
 
                                 </div>
                                 <div class="form-group">
-                                    <inpu type="text" data-emojiable="true" data-emoji-input="unicode">
+                                    <input type="hidden" id="postId">
                             <textarea class="form-control" rows="4"
                                       id="status"
                                       placeholder="Type your content here ..."></textarea>

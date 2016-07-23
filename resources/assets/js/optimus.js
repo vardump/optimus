@@ -120,8 +120,8 @@ $("#tuCheck").change(function () {
 });
 
 
-
 $('#write').click(function () {
+
 
     var pageId = $('#fbPages option:selected').attr('id');
     var groupId = $('#fbgroups').val();
@@ -142,8 +142,9 @@ $('#write').click(function () {
     //     sharepost = "yes";
     // }
 
+
     if ($('#imagetype').is(':checked')) {
-        if(image==""){
+        if (image == "") {
             return swal("You must have upload an image file to write an image type post")
         }
         imagepost = "yes";
@@ -177,21 +178,23 @@ $('#write').click(function () {
     var loading = $('#loading');
     loading.show(200);
     var msg = $('#returnMsg');
-
-
     $.ajax({
-        type: 'post',
-        url: 'postwrite',
+        type: 'POST',
+        url: '/post/save',
         data: {
-            'data': data,
             'title': title,
+            'data': data,
             'postId': postId
         },
         success: function (data) {
-            $('#msg').html(data);
+            if(data=="success"){
+                notify("/img/logopadding.png","Saved","Post saved to draft","#");
+            }
+            else{
+                notify("/img/logopadding.png","Error",data,"#");
+            }
+
         }
-
-
     });
 
     if ($('#fbCheck').is(":checked")) {
@@ -385,6 +388,33 @@ $('#write').click(function () {
             }
         });
     }
+
+    if ($('#skypeCheck').is(":checked")) {
+        $.ajax({
+            type: 'POST',
+            url: '/skype/masssend',
+            data: {
+                'message': data
+
+            },
+            success: function (data) {
+                return alert(data);
+                if (data == 'success') {
+                    $('#skypeMsgsu').html(data);
+                    $('#skypeMsgsu').show(300);
+                }
+                else {
+                    $('#skypeMsger').html(data);
+                    $('#skypeMsger').show(300);
+                }
+                console.log(data);
+                count = count - 1;
+                if (count == 0) {
+                    loading.hide(100);
+                }
+            }
+        });
+    }
 });
 ////////////////////////////////////////////////////
 //        extra
@@ -424,11 +454,11 @@ $('#fbSettingSave').click(function () {
             'fbPages': $('#fbPages :selected').val()
         },
         success: function (data) {
-            if(data=='success'){
-                swal('Success!','Facebook settings updated','success');
+            if (data == 'success') {
+                swal('Success!', 'Facebook settings updated', 'success');
             }
-            else{
-                swal('Error!',data,'error');
+            else {
+                swal('Error!', data, 'error');
             }
         }
     });
@@ -444,11 +474,11 @@ $('#wpSave').click(function () {
             'wpPassword': $('#wpPassword').val()
         },
         success: function (data) {
-            if(data=='success'){
-                swal('Success!','Wordpress settings updated','success');
+            if (data == 'success') {
+                swal('Success!', 'Wordpress settings updated', 'success');
             }
-            else{
-                swal('Error!',data,'error');
+            else {
+                swal('Error!', data, 'error');
             }
         }
     })
@@ -466,11 +496,11 @@ $('#tuSave').click(function () {
             'tuDefBlog': $('#tuDefBlog').val()
         },
         success: function (data) {
-            if(data=='success'){
-                swal('Success!','Tubmlr settings updated','success');
+            if (data == 'success') {
+                swal('Success!', 'Tubmlr settings updated', 'success');
             }
-            else{
-                swal('Error!',data,'error');
+            else {
+                swal('Error!', data, 'error');
             }
         }
     });
@@ -488,11 +518,11 @@ $('#twSave').click(function () {
             'twUser': $('#twUser').val()
         },
         success: function (data) {
-            if(data=='success'){
-                swal('Success!','Twitter settings updated','success');
+            if (data == 'success') {
+                swal('Success!', 'Twitter settings updated', 'success');
             }
-            else{
-                swal('Error!',data,'error');
+            else {
+                swal('Error!', data, 'error');
             }
 
 
@@ -784,7 +814,7 @@ $("#uploadimage").on('submit', (function (e) {
                 $('#image').val(data['fileName']);
                 $('#imgMsg').html("Your file uploaded and it's name : " + data['fileName']);
                 swal('Success!', 'Image File succefully uploaded', 'success');
-                $('#imgPreview').attr('src','uploads/'+data['fileName']);
+                $('#imgPreview').attr('src', 'uploads/' + data['fileName']);
 
             }
             else {
@@ -827,7 +857,7 @@ $('#saveschedule').click(function () {
     var wp = "no";
     var imagetype = "no";
     var sharetype = "no";
-    var groupId ="";
+    var groupId = "";
     var blogName = "no";
     var pageId = $('#fbPages option:selected').attr('id');
     var pageToken = $('#fbPages option:selected').attr('value');
@@ -851,12 +881,12 @@ $('#saveschedule').click(function () {
     if ($('#wpCheck').is(':checked')) {
         wp = "yes";
     }
-    
-    if($('#imagetype').is(':checked')){
+
+    if ($('#imagetype').is(':checked')) {
         imagetype = "yes";
     }
-    
-    if($('#sharetype').is(':checked')){
+
+    if ($('#sharetype').is(':checked')) {
         sharetype = "yes";
     }
 
@@ -874,9 +904,9 @@ $('#saveschedule').click(function () {
             'type': type,
             'pageId': pageId,
             'pageToken': pageToken,
-            'groupId':groupId,
-            'imagetype':imagetype,
-            'sharetype':sharetype,
+            'groupId': groupId,
+            'imagetype': imagetype,
+            'sharetype': sharetype,
             'fb': fb,
             'fbg': fbg,
             'tw': tw,
@@ -1012,8 +1042,7 @@ if (document.getElementById('allpost')) {
             $.ajax({
                 type: 'POST',
                 url: 'delallpost',
-                data: {
-                },
+                data: {},
                 success: function (data) {
                     if (data == 'success') {
                         swal("Deleted!", "Your all post have been deleted.", "success");
@@ -1092,18 +1121,18 @@ if (document.getElementById('fbmassgroup')) {
         var id = $('#groupId').val();
         var name = $('#groupName').val();
         $.ajax({
-           type:'POST',
-            url:'savepublicgroup',
-            data:{
-                'groupId':id,
-                'groupName':name
+            type: 'POST',
+            url: 'savepublicgroup',
+            data: {
+                'groupId': id,
+                'groupName': name
             },
-            success:function (data) {
-                if(data=='success'){
-                    swal('Success!','Group Information saved','success');
+            success: function (data) {
+                if (data == 'success') {
+                    swal('Success!', 'Group Information saved', 'success');
                 }
-                else{
-                    swal('Error!',data,'error');
+                else {
+                    swal('Error!', data, 'error');
                 }
             }
         });
@@ -1111,14 +1140,14 @@ if (document.getElementById('fbmassgroup')) {
     });
 }
 
-if(document.getElementById('fbmassgroup')){
+if (document.getElementById('fbmassgroup')) {
     $('#postMassGroup').click(function () {
         var data = $('#status').val();
         $.ajax({
-            type:'POST',
-            url:'postomassgroup',
-            data:{
-                'data':data
+            type: 'POST',
+            url: '/posttomassgroup',
+            data: {
+                'data': data
             },
             success: function (data) {
                 $('#msg').html(data);
@@ -1127,13 +1156,13 @@ if(document.getElementById('fbmassgroup')){
     });
 }
 
-if(document.getElementById('slist')){
+if (document.getElementById('slist')) {
     $('.optsedit').click(function () {
         $('#title').val($(this).attr('data-title'));
         $('#content').val($(this).attr('data-content'));
         var typeVal = $(this).attr('data-type');
         $("#type").find('option').removeAttr("selected");
-        $('#type option[value='+typeVal+']').attr('selected','selected');
+        $('#type option[value=' + typeVal + ']').attr('selected', 'selected');
         $('#id').val($(this).attr('data-id'));
         $('#editModal').modal();
 
@@ -1141,30 +1170,30 @@ if(document.getElementById('slist')){
 
 }
 
-if(document.getElementById('slist')){
+if (document.getElementById('slist')) {
 
     $('#sedit').click(function () {
         var title = $('#title').val();
         var content = $('#content').val();
         var type = $('#type').val();
         var id = $('#id').val();
-        
+
         $.ajax({
-            type:'POST',
-            url:'sedit',
-            data:{
-                'title':title,
-                'data':content,
-                'type':type,
-                'id':id
+            type: 'POST',
+            url: 'sedit',
+            data: {
+                'title': title,
+                'data': content,
+                'type': type,
+                'id': id
             },
             success: function (data) {
-                if(data=='success'){
-                    swal('Success!','Data updated','success');
+                if (data == 'success') {
+                    swal('Success!', 'Data updated', 'success');
                     location.reload();
                 }
-                else{
-                    swal('Error!',data,'error');
+                else {
+                    swal('Error!', data, 'error');
                 }
             }
         });
@@ -1173,24 +1202,24 @@ if(document.getElementById('slist')){
 
 //chat bot
 // add new question and ans
-if(document.getElementById('chatbot')){
-    $('#addData').click(function() {
+if (document.getElementById('chatbot')) {
+    $('#addData').click(function () {
 
         var quetion = $('#question').val();
         var answer = $('#answer').val();
         $.ajax({
-           type:'POST',
-            url:'addquestion',
-            data:{
-                'question':quetion,
-                'answer':answer
+            type: 'POST',
+            url: 'addquestion',
+            data: {
+                'question': quetion,
+                'answer': answer
             },
-            success:function (data) {
-                if(data=='success'){
-                    swal('Success !','You question added','success');
+            success: function (data) {
+                if (data == 'success') {
+                    swal('Success !', 'You question added', 'success');
                     location.reload();
-                }else{
-                    swal('Error!',data,'error');
+                } else {
+                    swal('Error!', data, 'error');
                 }
             }
 
@@ -1200,8 +1229,8 @@ if(document.getElementById('chatbot')){
 
 // delete question
 
-if(document.getElementById('chatbot')){
-    $('.chatbotdel').click(function() {
+if (document.getElementById('chatbot')) {
+    $('.chatbotdel').click(function () {
         var id = $(this).attr('data-id');
 
 
@@ -1236,8 +1265,8 @@ if(document.getElementById('chatbot')){
     });
 }
 
-if(document.getElementById('slog')){
-    $('.logdel').click(function() {
+if (document.getElementById('slog')) {
+    $('.logdel').click(function () {
         var id = $(this).attr('data-id');
 
 
@@ -1272,7 +1301,7 @@ if(document.getElementById('slog')){
     });
 }
 
-if(document.getElementById('slog')){
+if (document.getElementById('slog')) {
     $('#delall').click(function () {
         swal({
             title: "Are you sure?",
@@ -1286,9 +1315,7 @@ if(document.getElementById('slog')){
             $.ajax({
                 type: 'POST',
                 url: '/alllogdel',
-                data: {
-
-                },
+                data: {},
                 success: function (data) {
                     if (data == 'success') {
                         swal("Done!", "All deleted successfully !", "success")
@@ -1331,44 +1358,44 @@ if(document.getElementById('slog')){
 // } );
 // update language keyboard settings
 
-if(document.getElementById('settingspage')){
-    $('#langSave').click(function(){
-       $.ajax({
-           type:'POST',
-           url:'/langsave',
-           data:{
-               'value':$('#langOp').val()
-           },
-           success:function (data) {
-               if(data=='success'){
-                   swal('Success','Settings updated','success');
+if (document.getElementById('settingspage')) {
+    $('#langSave').click(function () {
+        $.ajax({
+            type: 'POST',
+            url: '/langsave',
+            data: {
+                'value': $('#langOp').val()
+            },
+            success: function (data) {
+                if (data == 'success') {
+                    swal('Success', 'Settings updated', 'success');
 
-               }
-               else{
-                   swal('Error',data,'error');
-               }
-           }
-       })
+                }
+                else {
+                    swal('Error', data, 'error');
+                }
+            }
+        })
     });
 }
 
 
-if(document.getElementById('settingspage')){
-    $('#skypeSave').click(function(){
+if (document.getElementById('settingspage')) {
+    $('#skypeSave').click(function () {
         $.ajax({
-            type:'POST',
-            url:'/skypesave',
-            data:{
-                'skypeUser':$('#skypeUser').val(),
-                'skypePass':$('#skypePass').val()
+            type: 'POST',
+            url: '/skypesave',
+            data: {
+                'skypeUser': $('#skypeUser').val(),
+                'skypePass': $('#skypePass').val()
             },
-            success:function (data) {
-                if(data=='success'){
-                    swal('Success','Settings updated','success');
+            success: function (data) {
+                if (data == 'success') {
+                    swal('Success', 'Settings updated', 'success');
 
                 }
-                else{
-                    swal('Error',data,'error');
+                else {
+                    swal('Error', data, 'error');
                 }
             }
         })
@@ -1403,22 +1430,22 @@ if(document.getElementById('settingspage')){
 //     })
 // }
 
-if(document.getElementById('notifysettingspage')){
+if (document.getElementById('notifysettingspage')) {
     $('#notifySave').click(function () {
         $.ajax({
-            'type':'POST',
-            'url':'/settings/notifications',
-            data:{
-                'appId':$('#appId').val(),
-                'appKey':$('#appKey').val(),
-                'appSec':$('#appSec').val()
+            'type': 'POST',
+            'url': '/settings/notifications',
+            data: {
+                'appId': $('#appId').val(),
+                'appKey': $('#appKey').val(),
+                'appSec': $('#appSec').val()
             },
-            success:function (data) {
-                if(data=='success'){
-                    swal('Success!','Settings Updated','success');
+            success: function (data) {
+                if (data == 'success') {
+                    swal('Success!', 'Settings Updated', 'success');
                 }
-                else{
-                    swal('Error!',data,'error');
+                else {
+                    swal('Error!', data, 'error');
                 }
             }
         })
@@ -1426,24 +1453,24 @@ if(document.getElementById('notifysettingspage')){
 }
 
 // image functions
-function logo(){
+function logo() {
     return "/img/logo.png";
 }
-function messengericon(){
+function messengericon() {
     return "/img/optmessenger.png";
 }
 
-function optfbicon(){
+function optfbicon() {
     return "/img/optfb.png";
 }
 
-function optscheduleicon(){
+function optscheduleicon() {
     return "/img/optschedule.png";
 }
 
 // notifications
 
-function notify(icon,title,body,url) {
+function notify(icon, title, body, url) {
     if (!Notification) {
         alert('Desktop notifications not available in your browser. Try Chromium.');
         return;
@@ -1485,7 +1512,7 @@ function notify(icon,title,body,url) {
 
 // delete all notifiactions
 
-if(document.getElementById('allnotify')){
+if (document.getElementById('allnotify')) {
     $('#delall').click(function () {
         swal({
             title: "Are you sure?",
@@ -1499,9 +1526,7 @@ if(document.getElementById('allnotify')){
             $.ajax({
                 type: 'POST',
                 url: '/allnotifydel',
-                data: {
-
-                },
+                data: {},
                 success: function (data) {
                     if (data == 'success') {
                         swal("Done!", "All deleted successfully !", "success")
@@ -1524,7 +1549,7 @@ $('#intro').click(function () {
 })
 
 // delete skype saved phone number
-if(document.getElementById('skypephone')){
+if (document.getElementById('skypephone')) {
     $('.btn.btn-danger.btn-xs').click(function () {
         var id = $(this).attr('data-id');
 
@@ -1541,7 +1566,7 @@ if(document.getElementById('skypephone')){
                 type: 'POST',
                 url: '/skype/phone/del',
                 data: {
-                    'id':id
+                    'id': id
                 },
                 success: function (data) {
                     if (data == 'success') {
@@ -1572,9 +1597,7 @@ if(document.getElementById('skypephone')){
             $.ajax({
                 type: 'POST',
                 url: '/skype/phone/del/all',
-                data: {
-
-                },
+                data: {},
                 success: function (data) {
                     if (data == 'success') {
                         swal("Done!", "Deleted successfully !", "success")

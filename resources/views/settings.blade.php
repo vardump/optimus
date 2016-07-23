@@ -199,7 +199,7 @@
                 </div>
                 <div class="row">
                     {{--keyboard settings --}}
-                    
+
                     {{-- skype settings--}}
 
                     <div class="col-md-6">
