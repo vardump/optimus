@@ -66,7 +66,7 @@
                             <ul class="nav nav-tabs">
                                 <li class="active"><a href="#dashboard" data-toggle="tab">Dashboard</a></li>
                                 <li><a href="#activity" data-toggle="tab">My Activity</a></li>
-                                <li><a href="#write" data-toggle="tab">Write</a></li>
+
                             </ul>
                             {{--My content start--}}
                             <div class="tab-content">
@@ -255,14 +255,7 @@
                                         </div><!-- /.post -->
                                     @endforeach
                                 </div><!-- /.tab-pane -->
-                                <div class="tab-pane" id="write">
-                                    <div class="form-group">
-                                        <input id="image" type="text" class="form-control" placeholder="Image Link ...">
-                                <textarea class="form-control" rows="4" id="status"
-                                          placeholder="Type here ..."></textarea><br>
-                                        <button class="btn btn-primary" id="tuwrite">Post now</button>
-                                    </div>
-                                </div><!-- /.tab-pane -->
+                                <!-- /.tab-pane -->
                             </div><!-- /.tab-content -->
                             {{--My content End--}}
                             {{-- Dashboard start--}}

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Allpost;
 use App\FacebookPages;
+use App\Fb;
 use App\Setting;
 use Facebook\Exceptions\FacebookResponseException;
 use Facebook\Exceptions\FacebookSDKException;
@@ -136,6 +138,7 @@ class FacebookController extends Controller
         try {
             $msg = json_decode($fb->delete($id, [], $token)->getBody(), true);
             if ($msg['success'] == 1) {
+                Fb::where('postId',$id)->delete();
                 return "success";
             }
 
@@ -147,27 +150,42 @@ class FacebookController extends Controller
 
     }
 
-    public static function fbDel($id){
+    public static function fbDel($id)
+    {
+        if (Fb::where('postId', $id)->exists()) {
+            $fbPostId = Fb::where('postId', $id)->value('fbId');
+            $pageId = Fb::where('postId', $id)->value('pageId');
 
-        $token = "pageTokenHERe";
-
-
-        $fb = new \Facebook\Facebook([
-            'app_id' => Data::get('fbAppId'),
-            'app_secret' => Data::get('fbAppSec'),
-            'default_graph_version' => 'v2.6',
-        ]);
-        try {
-            $msg = json_decode($fb->delete($id, [], $token)->getBody(), true);
-            if ($msg['success'] == 1) {
-                return "success";
+            if ($pageId == "") {
+                $token = Data::get('fbAppToken');
+            } else {
+                $token = Data::getToken($pageId);
             }
 
-        } catch (FacebookSDKException $e) {
-            return $e->getMessage() . "[ fsdk]";
-        } catch (FacebookResponseException $r) {
-            return $r->getMessage() . " [ fe ]";
+
+            $fb = new \Facebook\Facebook([
+                'app_id' => Data::get('fbAppId'),
+                'app_secret' => Data::get('fbAppSec'),
+                'default_graph_version' => 'v2.6',
+            ]);
+            try {
+                $msg = json_decode($fb->delete($fbPostId, [], $token)->getBody(), true);
+                if ($msg['success'] == 1) {
+                    Fb::where('postId',$id)->delete();
+                    return "Deleted form facebook : success";
+                }
+
+            } catch (FacebookSDKException $e) {
+                return $e->getMessage() . "[ fsdk]";
+            } catch (FacebookResponseException $r) {
+                return $r->getMessage() . " [ fe ]";
+            }
         }
+        else{
+//            return "Post couldn't found";
+        }
+
+
     }
 
     /**

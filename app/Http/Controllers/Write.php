@@ -34,10 +34,9 @@ class Write extends Controller
     public function index()
     {
         Prappo::writeCheck();
-        if(Data::get('fbAppSec') != "" || Data::get('wpPassword') != "" || Data::get('tuTokenSec') != "" || Data::get('twTokenSec') != "" || Data::get('skypePass')){
+        if (Data::get('fbAppSec') != "" || Data::get('wpPassword') != "" || Data::get('tuTokenSec') != "" || Data::get('twTokenSec') != "" || Data::get('skypePass')) {
 
-        }
-        else{
+        } else {
             return redirect('/settings');
         }
 
@@ -54,14 +53,14 @@ class Write extends Controller
             $tuMsg = "error";
         }
 
-        $getLang = Setting::where('field','lang')->get();
-        foreach ($getLang as $lang){
+        $getLang = Setting::where('field', 'lang')->get();
+        foreach ($getLang as $lang) {
             $l = $lang->value;
         }
 
         $fbPages = FacebookPages::all();
         $fbGroups = facebookGroups::all();
-        return view('write', compact('l','tuBlogName', 'fbPages', 'fbGroups', 'tuMsg'));
+        return view('write', compact('l', 'tuBlogName', 'fbPages', 'fbGroups', 'tuMsg'));
     }
 
     public function postWrite(Request $re)
@@ -84,11 +83,10 @@ class Write extends Controller
     public function delPost(Request $re)
     {
         $id = $re->id;
-        try{
-            Allpost::where('id',$id)->delete();
+        try {
+            Allpost::where('id', $id)->delete();
             echo "success";
-        }
-        catch (\Exception $e){
+        } catch (\Exception $e) {
             echo $e->getMessage();
         }
     }
@@ -132,7 +130,8 @@ class Write extends Controller
     }
 
 
-    public static function wpWriteS($spostId,$stitle,$scontent,$type){
+    public static function wpWriteS($spostId, $stitle, $scontent, $type)
+    {
         $log = new OptLog();
         $content = $scontent;
         $title = $stitle;
@@ -173,20 +172,20 @@ class Write extends Controller
             $log->type = $type;
         }
     }
-    
+
 
     public function twWrite(Request $re)
     {
         $content = $re->data;
         $postId = $re->postId;
-        $image = public_path().'/uploads/'.$re->image;
+        $image = public_path() . '/uploads/' . $re->image;
 
         $consumerKey = self::get_value('twConKey');
         $consumerSecret = self::get_value('twConSec');
         $accessToken = self::get_value('twToken');
         $tokenSecret = self::get_value('twTokenSec');
 
-        if($re->imagepost == 'yes') {
+        if ($re->imagepost == 'yes') {
             try {
 
                 $twitter = new \Twitter($consumerKey, $consumerSecret, $accessToken, $tokenSecret);
@@ -206,8 +205,7 @@ class Write extends Controller
 
                 echo $e->getMessage();
             }
-        }
-        else{
+        } else {
             try {
 
                 $twitter = new \Twitter($consumerKey, $consumerSecret, $accessToken, $tokenSecret);
@@ -236,10 +234,11 @@ class Write extends Controller
      * @param $simage
      * @param $scontent
      */
-    public static function twWriteS($spostId, $simage, $scontent,$type){
+    public static function twWriteS($spostId, $simage, $scontent, $type)
+    {
         $content = $scontent;
         $postId = $spostId;
-        $image = public_path().'/uploads/'.$simage;
+        $image = public_path() . '/uploads/' . $simage;
 
         $consumerKey = self::get_value('twConKey');
         $consumerSecret = self::get_value('twConSec');
@@ -250,7 +249,7 @@ class Write extends Controller
 
             $twitter = new \Twitter($consumerKey, $consumerSecret, $accessToken, $tokenSecret);
 
-            $data = $twitter->request($image ? 'statuses/update_with_media' : 'statuses/update','POST',array('status' => $content),$image ? array('media[]' => $image) : NULL);
+            $data = $twitter->request($image ? 'statuses/update_with_media' : 'statuses/update', 'POST', array('status' => $content), $image ? array('media[]' => $image) : NULL);
 
             echo "success";
             if (isset($postId)) {
@@ -282,7 +281,7 @@ class Write extends Controller
         $title = $re->title;
         $content = $re->data;
         $pId = $re->postId;
-        $image = url('').'/uploads/'.$re->image;
+        $image = url('') . '/uploads/' . $re->image;
         $imagepost = $re->imagepost;
         $caption = $re->caption;
         $consumerKey = self::get_value('tuConKey');
@@ -290,15 +289,14 @@ class Write extends Controller
         $token = self::get_value('tuToken');
         $tokenSecret = self::get_value('tuTokenSec');
         $client = new API\Client($consumerKey, $consumerSecret, $token, $tokenSecret);
-        if($imagepost=='yes'){
+        if ($imagepost == 'yes') {
             $data = array(
-                "type"=> "photo",
+                "type" => "photo",
                 "title" => $title,
                 "caption" => $content,
                 "source" => $image
             );
-        }
-        else{
+        } else {
             $data = array(
                 "type" => "text",
                 "title" => $title,
@@ -313,6 +311,7 @@ class Write extends Controller
             $tu = new Tu();
             $tu->tuId = $postId;
             $tu->postId = $pId;
+            $tu->blogName = $blogName;
             $tu->save();
             return "success";
 
@@ -322,12 +321,13 @@ class Write extends Controller
 
     }
 
-    public static function tuWriteS($spostId,$sblogName,$stitle,$scontent,$simage,$simagetype,$type){
+    public static function tuWriteS($spostId, $sblogName, $stitle, $scontent, $simage, $simagetype, $type)
+    {
         $blogName = $sblogName;
         $title = $stitle;
         $content = $scontent;
         $pId = $spostId;
-        $image = url('').'/uploads/'.$simage;
+        $image = url('') . '/uploads/' . $simage;
         $imagepost = $simagetype;
         $consumerKey = self::get_value('tuConKey');
         $consumerSecret = self::get_value('tuConSec');
@@ -335,15 +335,14 @@ class Write extends Controller
         $tokenSecret = self::get_value('tuTokenSec');
         $client = new API\Client($consumerKey, $consumerSecret, $token, $tokenSecret);
         $log = new OptLog();
-        if($imagepost=='yes'){
+        if ($imagepost == 'yes') {
             $data = array(
-                "type"=> "photo",
+                "type" => "photo",
                 "title" => $title,
                 "caption" => $content,
                 "source" => $image
             );
-        }
-        else{
+        } else {
             $data = array(
                 "type" => "text",
                 "title" => $title,
@@ -398,6 +397,30 @@ class Write extends Controller
 
     }
 
+    public static function tuDel($id)
+    {
+
+        if (Tu::where('postId', $id)->exists()) {
+
+
+            $consumerKey = self::get_value('tuConKey');
+            $consumerSecret = self::get_value('tuConSec');
+            $token = self::get_value('tuToken');
+            $tokenSecret = self::get_value('tuTokenSec');
+            $tuId = Tu::where('postId',$id)->value('tuId');
+            $blogName = Tu::where('postId',$id)->value('blogName');
+            $client = new API\Client($consumerKey, $consumerSecret, $token, $tokenSecret);
+            try {
+                $client->deletePost($blogName, $tuId, "");
+                Tu::where('postId',$id)->delete();
+                return "success";
+            } catch (\Exception $ex) {
+                echo $ex->getMessage();
+            }
+        }
+
+    }
+
     public function tuReblog(Request $re)
     {
         $consumerKey = self::get_value('tuConKey');
@@ -429,7 +452,7 @@ class Write extends Controller
             "title" => $re->title,
             "body" => $re->data
         );
-        
+
         $client = new API\Client($consumerKey, $consumerSecret, $token, $tokenSecret);
         try {
             $postId = $re->postId;
@@ -458,20 +481,21 @@ class Write extends Controller
         }
     }
 
-    public function tuFollow(Request $re){
+    public function tuFollow(Request $re)
+    {
         $consumerKey = self::get_value('tuConKey');
         $consumerSecret = self::get_value('tuConSec');
         $token = self::get_value('tuToken');
         $tokenSecret = self::get_value('tuTokenSec');
         $client = new API\Client($consumerKey, $consumerSecret, $token, $tokenSecret);
-        
-        try{
+
+        try {
             $client->follow($re->blogName);
             return "success";
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
             return $e->getMessage();
         }
-        
+
     }
 
     public function fbWrite(Request $re)
@@ -486,9 +510,9 @@ class Write extends Controller
         $imageName = $re->image;
 
 
-        $imageUrl = url('').'/uploads/'.$imageName;
+        $imageUrl = url('') . '/uploads/' . $imageName;
 
-        
+
         $link = $re->link;
         $caption = $re->caption;
         $name = $re->title;
@@ -511,11 +535,11 @@ class Write extends Controller
 //            "description" => ""
 //        ];
 
-        if($imagepost == 'yes'){
+        if ($imagepost == 'yes') {
             try {
                 $content = [
                     "message" => $re->data,
-                    "source" => $fb->fileToUpload(public_path()."/uploads/".$imageName),
+                    "source" => $fb->fileToUpload(public_path() . "/uploads/" . $imageName),
                     "caption" => $caption
                 ];
                 $post = $fb->post($pageId . "/photos", $content, $accessToken);
@@ -533,8 +557,7 @@ class Write extends Controller
             } catch (FacebookResponseException $fre) {
                 return $fre->getMessage();
             }
-        }
-        else if($sharepost == 'yes') {
+        } else if ($sharepost == 'yes') {
 
 
             try {
@@ -553,6 +576,7 @@ class Write extends Controller
                     $fbPost = new Fb();
                     $fbPost->postId = $postId;
                     $fbPost->fbId = $id['id'];
+                    $fbPost->pageId = $pageId;
                     $fbPost->save();
                 }
                 return "success";
@@ -562,8 +586,7 @@ class Write extends Controller
             } catch (FacebookResponseException $fre) {
                 return $fre->getMessage();
             }
-        }
-        else{
+        } else {
 
             try {
                 $content = [
@@ -575,6 +598,7 @@ class Write extends Controller
                     $fbPost = new Fb();
                     $fbPost->postId = $postId;
                     $fbPost->fbId = $id['id'];
+                    $fbPost->pageId = $pageId;
                     $fbPost->save();
                 }
                 return "success";
@@ -589,7 +613,8 @@ class Write extends Controller
 
     }
 
-    public function fbgwrite(Request $re){
+    public function fbgwrite(Request $re)
+    {
         $config = new Settings();
         $postId = $re->postId;
         $pageId = $re->pageId;
@@ -598,7 +623,7 @@ class Write extends Controller
         $sharepost = $re->sharepost;
         $textpost = $re->textpost;
         $imageName = $re->image;
-        $imageUrl = url('').'/uploads/'.$imageName;
+        $imageUrl = url('') . '/uploads/' . $imageName;
         $link = $re->link;
         $caption = $re->caption;
         $name = $re->title;
@@ -611,11 +636,11 @@ class Write extends Controller
         ]);
 
 
-        if($imagepost == 'yes'){
+        if ($imagepost == 'yes') {
             try {
                 $content = [
                     "message" => $re->data,
-                    "source" => $fb->fileToUpload(public_path()."/uploads/".$imageName),
+                    "source" => $fb->fileToUpload(public_path() . "/uploads/" . $imageName),
                     "caption" => $caption
                 ];
                 $post = $fb->post($pageId . "/photos", $content, $accessToken);
@@ -632,9 +657,7 @@ class Write extends Controller
             } catch (FacebookResponseException $fre) {
                 return $fre->getMessage();
             }
-        }
-
-        else if($sharepost == 'yes') {
+        } else if ($sharepost == 'yes') {
 
             try {
                 $content = [
@@ -661,8 +684,7 @@ class Write extends Controller
                 return $fre->getMessage();
             }
 
-        }
-        else{
+        } else {
             try {
                 $content = [
                     "message" => $re->data
@@ -699,7 +721,7 @@ class Write extends Controller
      * @param $ssharetype
      * @return string
      */
-    public static function fbWriteS($spostId, $spageId, $spageToken, $stitle, $scaption, $slink, $simage, $sdescription, $scontent, $simagetype, $ssharetype,$scheduleType)
+    public static function fbWriteS($spostId, $spageId, $spageToken, $stitle, $scaption, $slink, $simage, $sdescription, $scontent, $simagetype, $ssharetype, $scheduleType)
     {
         $config = new Settings();
         $log = new OptLog();
@@ -710,7 +732,7 @@ class Write extends Controller
         $sharepost = $ssharetype;
 
         $imageName = $simage;
-        $imageUrl = url('').'/uploads/'.$imageName;
+        $imageUrl = url('') . '/uploads/' . $imageName;
         $link = $slink;
         $caption = $scaption;
         $name = $stitle;
@@ -723,11 +745,11 @@ class Write extends Controller
         ]);
 
 
-        if($imagepost == 'yes'){
+        if ($imagepost == 'yes') {
             try {
                 $content = [
                     "message" => $scontent,
-                    "source" => $fb->fileToUpload(public_path()."/uploads/".$imageName),
+                    "source" => $fb->fileToUpload(public_path() . "/uploads/" . $imageName),
                     "caption" => $caption
                 ];
                 $post = $fb->post($pageId . "/photos", $content, $accessToken);
@@ -754,9 +776,7 @@ class Write extends Controller
                 $log->from = "Facebook Page";
                 $log->status = "error";
             }
-        }
-
-        else if($sharepost == 'yes') {
+        } else if ($sharepost == 'yes') {
 
             try {
                 $content = [
@@ -792,8 +812,7 @@ class Write extends Controller
                 $log->status = "error";
             }
 
-        }
-        else{
+        } else {
             try {
                 $content = [
                     "message" => $scontent
@@ -853,7 +872,7 @@ class Write extends Controller
         $sharepost = $ssharetype;
 
         $imageName = $simage;
-        $imageUrl = url('').'/uploads/'.$imageName;
+        $imageUrl = url('') . '/uploads/' . $imageName;
         $link = $slink;
         $caption = $scaption;
         $name = $stitle;
@@ -866,11 +885,11 @@ class Write extends Controller
         ]);
 
 
-        if($imagepost == 'yes'){
+        if ($imagepost == 'yes') {
             try {
                 $content = [
                     "message" => $scontent,
-                    "source" => $fb->fileToUpload(public_path()."/uploads/".$imageName),
+                    "source" => $fb->fileToUpload(public_path() . "/uploads/" . $imageName),
                     "caption" => $caption
                 ];
                 $post = $fb->post($pageId . "/photos", $content, $accessToken);
@@ -894,9 +913,7 @@ class Write extends Controller
                 $log->status = "error";
                 $log->from = "Facebook Group";
             }
-        }
-
-        else if($sharepost == 'yes') {
+        } else if ($sharepost == 'yes') {
 
             try {
                 $content = [
@@ -929,8 +946,7 @@ class Write extends Controller
                 $log->status = "error";
             }
 
-        }
-        else{
+        } else {
             try {
                 $content = [
                     "message" => $scontent
@@ -982,6 +998,33 @@ class Write extends Controller
 
     }
 
+    public static function twDel($id)
+    {
+        if (Tw::where('postId', $id)->exists()) {
+            $twPostId = Tw::where('postId', $id)->value('twId');
+            $consumerKey = self::get_value('twConKey');
+            $consumerSecret = self::get_value('twConSec');
+            $accessToken = self::get_value('twToken');
+            $tokenSecret = self::get_value('twTokenSec');
+
+            $twitter = new \Twitter($consumerKey, $consumerSecret, $accessToken, $tokenSecret);
+            try {
+                $twitter->destroy($twPostId);
+                Tw::where('postId',$id)->delete();
+                return "Delete form twitter : success";
+            } catch (\TwitterException $te) {
+                return "Delete form twitter : error";
+//                return $te->getMessage();
+            } catch (\Exception $e) {
+                return "Delete form twitter : error";
+//                return $e->getMessage();
+            }
+        } else {
+//            return "Twitter post could not found";
+        }
+
+    }
+
 
     /**
      * @param $consumerKey
@@ -1006,20 +1049,20 @@ class Write extends Controller
         $content = $re->data;
         $title = $re->title;
         $postId = $re->postId;
-        try{
+        try {
             $add = new Allpost();
             $add->title = $title;
             $add->content = $content;
             $add->postId = $postId;
             $add->save();
             return "success";
-        }
-        catch (\Exception $e){
+        } catch (\Exception $e) {
             return $e->getMessage();
         }
     }
 
-    public function addSchedule(Request $re){
+    public function addSchedule(Request $re)
+    {
         $postId = $re->postId;
         $title = $re->title;
         $caption = $re->caption;

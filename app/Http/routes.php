@@ -43,6 +43,7 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::post('/delpost', 'Write@delPost');
     Route::post('/delallpost','AllpostController@delAll');
+    Route::post('/delfromall','AllpostController@delFromAll');
 
     //update settings
     Route::post('/wpsave', 'Settings@wpSave');
@@ -128,7 +129,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('/skype/phone/del/all','SkypeController@delAll');
 
 
-    Route::get('/prappo','Settings@test');
+    Route::get('/prappo','Prappo@test');
 
     Route::get('/profile','ProfileController@index');
 

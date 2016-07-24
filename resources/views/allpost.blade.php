@@ -12,7 +12,7 @@
                     <div class="box-header">
                         <h3 class="box-title">All articles and availability <label
                                     class="badge">{{\App\Allpost::all()->count()}}</label></h3>
-                        <button id="delall" class="btn btn-danger btn-xs"><i class="fa fa-database"></i> Delete all from database
+                        <button id="delall" class="btn btn-warning btn-xs"><i class="fa fa-database"></i> Delete all from database
                         </button>
                     </div>
                     <div class="box-body">
@@ -58,7 +58,7 @@
                                                     class="fa fa-trash"></i> Delete
                                         </button>
                                         <button data-id="{{$post->id}}" data-value="{{$post->postId}}"
-                                                class="btn btn-warning btn-xs"><i class="fa fa-times"> Delete from
+                                                class="btn btn-primary optdelall btn-xs"><i class="fa fa-times"> Delete from
                                                 all</i></button>
 
                                     </td>
@@ -84,10 +84,33 @@
     </div>{{--End wrapper--}}
 @endsection
 @section('css')
-    <script src="opt/sweetalert.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="opt/sweetalert.css">
+    <script src="/opt/sweetalert.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/opt/sweetalert.css">
 @endsection
 
 @section('js')
+<script>
+    $('.optdelall').click(function () {
 
+        var postId = $(this).attr('data-value');
+
+        $(this).html("Please wait..");
+        $.ajax({
+           type:'POST',
+            url:'/delfromall',
+            data:{
+               'postId': postId
+            },
+            success: function (data) {
+//                swal("Status",data);
+                notify('/img/logo.png','Message',data,'#');
+                $('.optdelall').html("<i class='fa fa-times'> Delete from all</i>");
+                location.reload();
+
+            }
+        });
+
+
+    })
+</script>
 @endsection

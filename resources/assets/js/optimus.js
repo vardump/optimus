@@ -398,7 +398,7 @@ $('#write').click(function () {
 
             },
             success: function (data) {
-                return alert(data);
+
                 if (data == 'success') {
                     $('#skypeMsgsu').html(data);
                     $('#skypeMsgsu').show(300);
@@ -855,6 +855,7 @@ $('#saveschedule').click(function () {
     var tw = "no";
     var tu = "no";
     var wp = "no";
+    var skype = "no";
     var imagetype = "no";
     var sharetype = "no";
     var groupId = "";
@@ -880,6 +881,9 @@ $('#saveschedule').click(function () {
     }
     if ($('#wpCheck').is(':checked')) {
         wp = "yes";
+    }
+    if($('#skypeCheck').is(':checked')){
+        skype = "yes";
     }
 
     if ($('#imagetype').is(':checked')) {

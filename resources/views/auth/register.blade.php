@@ -5,6 +5,7 @@
     <div class="container">
         <div class="login-box">
             <div class="login-logo">
+                <img src="/img/logo.png">
                 <a href="#"><b>Optimus</b>PRIME</a>
             </div>
             <div class="login-box-body">

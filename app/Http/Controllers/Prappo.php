@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Phones;
 use App\Setting;
+use App\Tu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
@@ -11,6 +12,7 @@ use Illuminate\Support\Facades\Input;
 
 use Pusher;
 use Registration;
+use Tumblr\API\Client;
 use WhatsProt;
 
 
@@ -266,7 +268,13 @@ class Prappo extends Controller
         return 'https://api.skype.com/users/' . $user . '/profile/avatar';
     }
 
+    public function test(){
+        $blogName = "prappoprince";
+        $title = "sometitle";
+        $content = "gogogo";
+        $pId = "23434";
 
+    }
 
 
 }

@@ -13,20 +13,21 @@
                     <div class="col-md-12">
                         <div class="nav-tabs-custom">
                             <ul class="nav nav-tabs">
-                                <li class="active"><a href="#write" data-toggle="tab"><i
-                                                class="fa fa-pencil-square"></i> Write</a></li>
+                                <?php $tabCount = 0;?>
                                 {{--fetching page names --}}
                                 @foreach($data['groups']['data'] as $pageNo => $pageData)
-                                    <li><a href="#{{ $pageData['id'] }}" data-toggle="tab">{{ $pageData['name'] }}</a>
+                                    <li @if($tabCount == 0) class="active" @endif><a href="#{{ $pageData['id'] }}" data-toggle="tab">{{ $pageData['name'] }}</a>
                                     </li>
+                                    <?php $tabCount++;?>
                                 @endforeach
 
 
                             </ul>
                             <div class="tab-content">
                                 {{--loop for tabs according to facebook pages--}}
+                                <?php $tabContentCount =0;?>
                                 @foreach($data['groups']['data'] as $pageNo => $pageData)
-                                    <div class="tab-pane" id="{{ $pageData['id'] }}">
+                                    <div class="@if($tabContentCount == 0) active @endif tab-pane" id="{{ $pageData['id'] }}">
                                         <!-- Post -->
                                         {{--loop for feeds of pages--}}
                                         @foreach($pageData['feed']['data'] as $contentNo => $content)
@@ -242,30 +243,9 @@
 
 
                                     </div><!-- /.tab-pane -->
+                                <?php $tabContentCount++;?>
                                 @endforeach
-                                <div class="active tab-pane" id="write">
-                                    <div class="form-group">
-                                        <input type="text" placeholder="Title" id="dataTitle" class="form-control">
-                                        <input type="text" placeholder="Caption" id="caption" class="form-control">
-                                        <input type="text" placeholder="Link" id="Link" class="form-control">
-
-                                        <input type="text" placeholder="Description" id="description"
-                                               class="form-control">
-                                        <form id="uploadimage" method="post" enctype="multipart/form-data">
-                                            <label>Select Your Image</label><br/>
-                                            <input type="file" name="file" id="file"/>
-                                            <input type="submit" value="Upload" id="imgUploadBtn"/>
-                                            <input type="hidden" id="image">
-                                            <div id="imgMsg"></div>
-                                        </form>
-
-                                        <input type="checkbox" id="imagetype"> Image Post
-                                <textarea class="form-control" rows="4" id="status"
-                                          placeholder="Type here ..."></textarea><br>
-
-                                        <button class="btn btn-primary" id="fbwrite">Post now</button>
-                                    </div>
-                                </div><!-- /.tab-pane -->
+                                <!-- /.tab-pane -->
 
 
                             </div><!-- /.tab-content -->

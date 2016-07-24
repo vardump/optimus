@@ -26,7 +26,13 @@ class AllpostController extends Controller
      */
     public function delFromAll(Request $re)
     {
-        $postId = $re->postId;
+
+        $fbDel = FacebookController::fbDel($re->postId);
+        $twDel = Write::twDel($re->postId);
+        $wpDel = WordpressController::wpDel($re->postId);
+        $tuDel = Write::tuDel($re->postId);
+        Allpost::where('postId',$re->postId)->delete();
+        return $fbDel . " | ".$twDel." | ".$wpDel." | ".$tuDel;
 
     }
 

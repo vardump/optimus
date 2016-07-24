@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTusTable extends Migration
+class CreateFbgsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,12 +12,11 @@ class CreateTusTable extends Migration
      */
     public function up()
     {
-        Schema::create('tus', function (Blueprint $table) {
+        Schema::create('fbgs', function (Blueprint $table) {
             $table->increments('id');
             $table->string('postId');
-            $table->string('tuId');
-            $table->string('blogName');
-            $table->string('reBlogKey');
+            $table->string('fbId');
+            $table->string('fbGroupId');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateTusTable extends Migration
      */
     public function down()
     {
-        Schema::drop('tus');
+        Schema::drop('fbgs');
     }
 }
