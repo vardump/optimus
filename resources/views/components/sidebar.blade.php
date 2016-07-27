@@ -99,7 +99,7 @@
                 </a>
                 <ul class="treeview-menu" style="display: none;">
                     <li><a href="/report/all"><i class="fa fa-files-o"></i> <span>All reports</span></a></li>
-                    <li><a href="/report/all"><i class="fa fa-files-o"></i> <span>Facebook reports</span></a></li>
+                    <li><a href="/fbreport"><i class="fa fa-files-o"></i> <span>Facebook reports</span></a></li>
                 </ul>
             </li>
 
@@ -125,6 +125,7 @@
                     <li><a href="/settings"><i class="fa fa-gear"></i> <span>Social</span></a></li>
                     <li><a href="/settings/notifications"><i class="fa fa-bell"></i> <span>Notifications</span></a></li>
                     <li><a href="/settings/config"><i class="fa fa-gears"></i> <span>Configurations</span></a></li>
+                    <li><a href="/profile"><i class="fa fa-user"></i> <span>Profile</span></a></li>
 
 
                 </ul>

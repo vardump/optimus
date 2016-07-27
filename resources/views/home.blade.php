@@ -10,7 +10,7 @@
                 <h1>Dashboard</h1>
             </section>
 
-            <section class="content">
+            <section data-step="1" data-intro="You will see summary of your sites and posts" class="content">
                 <div class="row">
                     <div class="col-md-4 col-sm-6 col-xs-12">
                         <div class="info-box">

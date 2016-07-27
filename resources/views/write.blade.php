@@ -36,7 +36,7 @@
                                 {{--</div>--}}
                                 {{--@endif--}}
                                 <div data-step="1"
-                                     data-intro="Title for your post , Title only available for <h1>facebook</h1> ,wordpress and tumblr"
+                                     data-intro="Title for your post , Title only available for facebook ,wordpress and tumblr"
                                      class="form-group">
                                     <div class="row">
                                         <div class="col-sm-12">
@@ -58,7 +58,7 @@
 
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div data-step="3" data-intro="Link that you want to share on facebook , This is only avilable for facebook shared type post" class="form-group">
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <input id="link" type="text" class="form-control"
@@ -67,7 +67,7 @@
 
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div data-step="4" data-intro="Select your image file that you want to post , You can post image on Facebook , Twitter & Thumblr . Image posting is not avialbale for wordpress and skype" class="form-group">
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <form id="uploadimage" method="post" enctype="multipart/form-data">
@@ -83,7 +83,7 @@
 
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div data-step="5" data-intro="Description for facebook shared type post . Only avilable for facebook shared type post" class="form-group">
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <input id="description" type="text" class="form-control"
@@ -95,7 +95,7 @@
                                 </div>
 
 
-                                <div class="form-group">
+                                <div data-step="6" data-intro="Select your post type . Shared Post only for facebook , And image type post is not avialable for wordpress and skype . That means you can't post image on wordpress and skype right now . May be we can add this feature later" class="form-group">
                                     <div class="radio">
                                         <label>
                                             <input type="radio" name="r" id="imagetype" value="imagetype">
@@ -117,7 +117,7 @@
                                     </div>
 
                                 </div>
-                                <div class="form-group">
+                                <div data-step="7" data-intro="Write whatever you want to post . You can use emoji by simply clicking emoji button on top right" class="form-group">
                                     <input type="hidden" id="postId">
                             <textarea class="form-control" rows="4"
                                       id="status"
@@ -126,7 +126,7 @@
 
 
                             </div>
-                            <div style="padding-left: 10px" class="form-group">
+                            <div data-step="8" data-intro="Options available for your post according to your seetings" style="padding-left: 10px" class="form-group">
                                 <div class="btn-group btn-group-xs" data-toggle="buttons">
                                     @if(\App\Setting::where('field','fbAppToken')->exists())
                                         @foreach(\App\Setting::where('field','fbAppToken')->get() as $d)
@@ -281,11 +281,11 @@
 
                             <div style="padding-left: 10px" class="form-group">
                                 <br>
-                                <button id="write" id="write" class="btn btn-success"><i class="fa fa-send"></i>
+                                <button data-step="10" data-intro="Click here to post Your article" id="write" id="write" class="btn btn-success"><i class="fa fa-send"></i>
                                     Post
                                 </button>
 
-                                <button id="addschedule" class="btn btn-default"><i class="fa fa-calendar"></i> Add
+                                <button data-step="11" data-intro="Click here to schedule your post" id="addschedule" class="btn btn-default"><i class="fa fa-calendar"></i> Add
                                     to
                                     schedule
                                 </button>
@@ -373,7 +373,7 @@
 
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div data-step="9" data-intro="Uploaded image will appear here . You can see preview of the uploaded Image" class="col-md-6">
                             <div class="row">
                                 <div class="form-group">
                                     <img src="/img/placeholder.png" width="400" height="450" id="imgPreview">
