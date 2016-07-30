@@ -9,7 +9,7 @@
             <section class="content">
                 <div class="col-md-6">
 
-
+<div id="masssend"></div>
                     <div class="box box-widget widget-user-2">
                         <!-- Add the bg color to the header using any of the bg-* classes -->
                         <div class="widget-user-header bg-info">
@@ -56,11 +56,13 @@
 @section('js')
     <script>
         $('#sendMsg').click(function () {
+            $('#box').html("Please wait . Optimus sending message to all available conversations");
            $.ajax({
                type:'POST',
                url:'/massreplay',
                data:{
                    'pageId':$('#pageId').val(),
+                   'message':$('#message').val()
                },
                success:function (data) {
                    $('#box').html(data);

@@ -64,7 +64,9 @@
     {{--emoji start--}}
      $(document).ready(function() {
          if(document.getElementById('status')){
-             $("#status").emojioneArea();
+             $("#status").emojioneArea({
+                 pickerPosition: "bottom"
+             });
          }
 //        if(document.getElementById('facebookpage')){
 //            $(".input-sm").emojioneArea();

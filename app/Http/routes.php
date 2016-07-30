@@ -95,7 +95,7 @@ Route::group(['middleware' => 'web'], function () {
 
         Route::get('/masssend/{pageId}', 'FacebookController@massSend');
         Route::get('/masssend', 'FacebookController@massSendIndex');
-        Route::get('/massreplay/{pageId}', 'FacebookController@massReplay');
+        Route::post('/massreplay', 'FacebookController@massReplay');
 
         Route::get('/chatbot', 'ChatBotController@index');
         Route::post('/addquestion', 'ChatBotController@addQuestion');

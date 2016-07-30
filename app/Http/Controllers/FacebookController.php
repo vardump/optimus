@@ -361,9 +361,10 @@ class FacebookController extends Controller
      * @param $pageId
      * @return string
      */
-    public function massReplay($pageId)
+    public function massReplay(Request $re)
     {
-
+        $pageId = $re->pageId;
+        $message = $re->message;
 
         $fb = new \Facebook\Facebook([
             'app_id' => Data::get('fbAppId'),
@@ -375,15 +376,29 @@ class FacebookController extends Controller
         foreach ($pages as $page) {
             $token = $page->pageToken;
         }
+        $conCount = 0;
+        $msgCount = 0;
 
         try {
-            $response = $fb->get($pageId . '/feed/?fields=comments', $token)->getDecodedBody();
-            print_r($response);
+            $response = $fb->get($pageId . '?fields=conversations', $token)->getDecodedBody();
+            foreach ($response['conversations']['data'] as $conNo => $conversation){
+                $conId = $conversation['id'];
+                try{
+                    $fb->post($conId."/messages",['message'=>$message],$token);
+                    $msgCount++;
+                }
+                catch (\Exception $e){
+
+                }
+                $conCount++;
+            }
         } catch (FacebookSDKException $sdk) {
             return $sdk->getMessage();
         } catch (FacebookResponseException $rs) {
             return $rs->getMessage();
         }
+        echo "Total conversations = " . $conCount . "<br>";
+        echo "Total successful sent message = ".$msgCount;
     }
 
     /**
