@@ -155,6 +155,7 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+            RachidLaasri\LaravelInstaller\Providers\LaravelInstallerServiceProvider::class,
         
 
     ],
