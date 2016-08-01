@@ -188,22 +188,22 @@
                                                     @endif
                                                     <div id="emotions" style="padding-left: 10px" class="row">
                                                         {{--@if($likes > 0)--}}
-                                                        <img src="img/likesmall.gif">
+                                                        <img src="/images/optimus/social/likesmall.gif">
                                                         {{$likes}}</span>
                                                         {{--@elseif($love>0)--}}
-                                                        <img src="img/lovesmall.gif">
+                                                        <img src="/images/optimus/social/lovesmall.gif">
                                                         {{$love}}
                                                         {{--@elseif($haha>0)--}}
-                                                        <img src="img/hahasmall.gif">
+                                                        <img src="/images/optimus/social/hahasmall.gif">
                                                         {{$haha}}
                                                         {{--@elseif($wow>0)--}}
-                                                        <img src="img/wowsmall.gif">
+                                                        <img src="/images/optimus/social/wowsmall.gif">
                                                         {{$wow}}
                                                         {{--@elseif($sad>0)--}}
-                                                        <img src="img/sadsmall.gif">
+                                                        <img src="/images/optimus/social/sadsmall.gif">
                                                         {{$sad}}
                                                         {{--@elseif($angry>0)--}}
-                                                        <img src="img/angrysmall.gif">
+                                                        <img src="/images/optimus/social/angrysmall.gif">
                                                         {{ $angry }}
 
                                                         {{--@endif--}}
@@ -260,7 +260,7 @@
                                                                                 <div class="user-block">
 
                                                                                     <img class="img-circle img-bordered-sm"
-                                                                                         src="img/me.png"
+                                                                                         src="/images/optimus/social/me.png"
                                                                                          alt="user image">
                                                                         <span class='username'>
                                                                           <a target="_blank"

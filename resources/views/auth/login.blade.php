@@ -5,7 +5,7 @@
 @endsection
 <div class="login-box">
     <div class="login-logo">
-        <img src="/img/logo.png">
+        <img src="images/optimus/logo.png">
         <a href="#"><b>Optimus</b>PRIME</a>
     </div>
 

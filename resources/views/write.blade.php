@@ -376,7 +376,7 @@
                         <div data-step="9" data-intro="Uploaded image will appear here . You can see preview of the uploaded Image" class="col-md-6">
                             <div class="row">
                                 <div class="form-group">
-                                    <img src="/img/placeholder.png" width="400" height="450" id="imgPreview">
+                                    <img src="/images/optimus/social/placeholder.png" width="400" height="450" id="imgPreview">
                                 </div>
                             </div>
                             <div class="row">

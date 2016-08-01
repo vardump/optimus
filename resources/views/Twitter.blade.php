@@ -81,9 +81,9 @@
 
                                             </p>
                                             <div class="row" style="padding-left: 10px"><img
-                                                        src="img/twlove.gif"> {{ $fields->favorite_count }} <img
+                                                        src="/images/optimus/social/twlove.gif"> {{ $fields->favorite_count }} <img
                                                         style="margin-left: 10px" height="20" width="20"
-                                                        src="img/retweet.png"> {{ $fields->retweet_count }}</div>
+                                                        src="/images/optimus/social/retweet.png"> {{ $fields->retweet_count }}</div>
 
                                             &nbsp;Mentions :
                                             @foreach($fields->entities->user_mentions as $mNo => $mentions)
@@ -178,9 +178,9 @@
                                                     <li>
                                                         <div class="row">
                                                             <img style="padding-left: 10px"
-                                                                 src="img/twlove.gif"> {{$obj->favorite_count}} <img
+                                                                 src="/images/optimus/social/twlove.gif"> {{$obj->favorite_count}} <img
                                                                     style="margin-left: 10px" height="20" width="20"
-                                                                    src="img/retweet.png"> {{ $obj->retweet_count }}
+                                                                    src="/images/optimus/social/retweet.png"> {{ $obj->retweet_count }}
 
                                                             &nbsp; Mentions :
                                                             @foreach($obj->entities->user_mentions as $mNo => $mentions)
@@ -218,9 +218,9 @@
 
                                             </p>
                                             <div class="row" style="padding-left: 10px"><img
-                                                        src="img/twlove.gif"> {{ $f->favorite_count }} <img
+                                                        src="/images/optimus/social/twlove.gif"> {{ $f->favorite_count }} <img
                                                         style="margin-left: 10px" height="20" width="20"
-                                                        src="img/retweet.png"> {{ $f->retweet_count }}</div>
+                                                        src="/images/optimus/social/retweet.png"> {{ $f->retweet_count }}</div>
 
                                             &nbsp; Mentions :
                                             @foreach($f->entities->user_mentions as $mNo => $mentions)

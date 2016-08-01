@@ -58,7 +58,7 @@
             }
             else {
                 $('#scraper').html(
-                        '<div align="center"><h3>Searching ......</h3><br><img src="/img/loader.gif">'
+                        '<div align="center"><h3>Searching ......</h3><br><img src="/images/optimus/social/loader.gif">'
                 );
                 $.ajax({
                     type: 'POST',
