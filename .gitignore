@@ -6,7 +6,8 @@ Homestead.json
 public/build
 public/css
 public/fonts
-public/images
+public/images/admin-lte
+public/images/dataTables
 public/js
 public/uploads
 public/skypephp_cache

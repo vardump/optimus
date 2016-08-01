@@ -2,9 +2,9 @@
     <!-- Logo -->
     <a href="#" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini"><b>O</b>P</span>
+        <span class="logo-mini"><img src="{{ url('/images/optimus/logo.png') }}" alt="Optimus"></span>
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><b>Optimus</b>PRIME</span>
+        <span class="logo-lg"><b>Optimus</b></span>
     </a>
 
     <!-- Header Navbar: style can be found in header.less -->

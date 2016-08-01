@@ -128,8 +128,6 @@ Route::group(['middleware' => 'web'], function () {
         Route::post('/skype/phone/del/all', 'SkypeController@delAll');
 
 
-        Route::get('/prappo', 'Prappo@test');
-
         Route::get('/profile', 'ProfileController@index');
     });
 
