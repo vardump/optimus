@@ -25,7 +25,7 @@
                                 <ul class="users-list clearfix">
                                     @foreach($contacts as $contact)
                                         <li>
-                                            <img src="@if(isset($contact['avatar_url'])){{$contact['avatar_url']}}@else /images/optimus/social/logopadding.png @endif"
+                                            <img src="@if(isset($contact['avatar_url'])){{$contact['avatar_url']}}@else {{url('/images/optimus/social/logopadding.png')}} @endif"
                                                  alt="User Image">
                                             <a target="_blank" class="users-list-name"
                                                href="/skype/user/{{$contact['id']}}">{{$contact['display_name']}}</a>
@@ -52,7 +52,7 @@
                                 <div class="widget-user-header bg-yellow">
                                     <div class="widget-user-image">
                                         <img class="img-circle"
-                                             src="@if(!isset($profile['avatarUrl']) || $profile['avatarUrl'] == "")/images/optimus/social/logopadding.png @else {{$profile['avatarUrl']}}@endif"
+                                             src="@if(!isset($profile['avatarUrl']) || $profile['avatarUrl'] == ""){{url('/images/optimus/social/logopadding.png')}} @else {{$profile['avatarUrl']}}@endif"
                                              alt="User Avatar">
                                     </div>
                                     <!-- /.widget-user-image -->
@@ -92,7 +92,7 @@
                                 <div class="widget-user-header bg-info">
                                     <div class="widget-user-image">
                                         <img class="img-circle"
-                                             src="/images/optimus/social/logopadding.png"
+                                             src="{{url('/images/optimus/social/logopadding.png')}}"
                                              alt="User Avatar">
                                     </div>
                                     <!-- /.widget-user-image -->

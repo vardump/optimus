@@ -13,7 +13,7 @@
                         <!-- Profile Image -->
                         <div class="box box-primary">
                             <div class="box-body box-profile">
-                                <img class="profile-user-img img-responsive img-circle" src="/images/optimus/social/wp.png"
+                                <img class="profile-user-img img-responsive img-circle" src="{{url('/images/optimus/social/wp.png')}}"
                                      alt="User profile picture">
                                 <h3 class="profile-username text-center">{{\App\Http\Controllers\Data::get('wpUrl')}}</h3>
 

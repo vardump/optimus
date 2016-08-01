@@ -75,7 +75,7 @@
                                     @foreach($dashboard->posts as $fieldNo => $field)
                                         <div class="post">
                                             <div class="user-block">
-                                                <img class="img-circle img-bordered-sm" src="/images/optimus/social/tumblr.png"
+                                                <img class="img-circle img-bordered-sm" src="{{url('/images/optimus/social/tumblr.png')}}"
                                                      alt="user image">
                                                 <span class='username'>
                                                   <a href="{{ $field->post_url }}"

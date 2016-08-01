@@ -45,7 +45,7 @@
                                                 <ul class="users-list clearfix">
                                                     @foreach($con['participants']['data'] as $par)
                                                         <li>
-                                                            <img src="@if(isset($par['picture']['data']['url'])) {{($par['picture']['data']['url'])}}@else /images/optimus/social/fb.png @endif"
+                                                            <img src="@if(isset($par['picture']['data']['url'])) {{($par['picture']['data']['url'])}}@else {{url('/images/optimus/social/fb.png')}} @endif"
                                                                  alt="User Image">
                                                             <a class="users-list-name" href="http://facebook.com/{{$par['id']}}">{{$par['name']}}</a>
 
