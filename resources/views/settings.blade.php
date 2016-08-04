@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title','Settings')
+@section('title','Settings | Optimus')
 
 @section('content')
     <div class="wrapper">
