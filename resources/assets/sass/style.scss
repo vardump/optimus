@@ -1,8 +1,12 @@
 .main-header {
   .logo {
-    .logo-mini {
+    img {
+      max-height: 20px;
+    }
+
+    .logo-lg {
       img {
-        max-height: 20px;
+        margin-right: 10px;
       }
     }
   }
