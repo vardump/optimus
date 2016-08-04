@@ -5,7 +5,9 @@
     <div class="wrapper">
         @include('components.navigation')
         @include('components.sidebar')
+
         <div id="settingspage"></div>
+
         <div class="content-wrapper">
             <section class="content">
                 <div class="row">
@@ -19,31 +21,31 @@
                             <div class="box-body">
                                 <div class="form-group">
                                     <label for="tuConKey">Tumblr Consumer Key</label>
-                                    <input class="form-control" id="tuConKey" value="{{$tuConKey}}"
-                                           placeholder="Tumblr Consumer Key" type="text">
+                                    <input class="form-control" id="tuConKey" value="{{ $tuConKey }}"
+                                           placeholder="Tumblr Consumer Key" type="text" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="tuConSec">Tumblr Consumer Secret</label>
-                                    <input class="form-control" value="{{$tuConSec}}" id="tuConSec"
+                                    <input class="form-control" value="{{ $tuConSec }}" id="tuConSec"
                                            placeholder="Tumblr Consumer Secret" type="text">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="tuToken">Tumblr Token</label>
-                                    <input class="form-control" value="{{$tuToken}}" id="tuToken"
+                                    <input class="form-control" value="{{ $tuToken }}" id="tuToken"
                                            placeholder="Tumblr Token"
                                            type="text">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="tuTokenSec">Tumblr Token Secret</label>
-                                    <input class="form-control" value="{{$tuTokenSec}}" id="tuTokenSec"
+                                    <input class="form-control" value="{{ $tuTokenSec }}" id="tuTokenSec"
                                            placeholder="Tumblr Token Secret" type="text">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="tuDefBlog">Tumblr Defautl Blog name</label>
-                                    <input disabled="true" class="form-control" value="{{$tuDefBlog}}" id=""
+                                    <input disabled class="form-control" value="{{ $tuDefBlog }}" id=""
                                            placeholder="Tumblr Defautl blog name" type="text">
 
                                 </div>
@@ -52,17 +54,16 @@
                                     <label for="tuDefBlog">Tumblr Available Blogs</label>
                                     <select id="tuDefBlog">
                                         @foreach($tuBlogs as $blog)
-                                            <option>{{$blog->blogName}}</option>
+                                            <option>{{ $blog->blogName }}</option>
                                         @endforeach
                                     </select>
 
                                 </div>
-
                             </div><!-- /.box-body -->
 
                             <div class="box-footer">
                                 <button id="tuSave" class="btn btn-primary">Save</button>
-                                <a id="tuSync" href="tusync" class="btn btn-warning">Sync Now</a>
+                                <a id="tuSync" href="{{ url('/tusync') }}" class="btn btn-warning">Sync Now</a>
                             </div>
 
                         </div>
@@ -78,31 +79,31 @@
                             <div class="box-body">
                                 <div class="form-group">
                                     <label for="twConKey">Twitter Consumer Key</label>
-                                    <input class="form-control" value="{{$twConKey}}" id="twConKey"
+                                    <input class="form-control" value="{{ $twConKey }}" id="twConKey"
                                            placeholder="Twitter Consumer Key" type="text">
                                 </div>
                                 <div class="form-group">
                                     <label for="twConSec">Twitter Consumer Secret</label>
-                                    <input class="form-control" value="{{$twConSec}}" id="twConSec"
+                                    <input class="form-control" value="{{ $twConSec }}" id="twConSec"
                                            placeholder="Twitter Consumer Secret" type="text">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="twToken">Twitter Token</label>
-                                    <input class="form-control" value="{{$twToken}}" id="twToken"
+                                    <input class="form-control" value="{{ $twToken }}" id="twToken"
                                            placeholder="Twitter Token"
                                            type="text">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="twTokenSec">Twitter Token Secret</label>
-                                    <input class="form-control" value="{{$twTokenSec}}" id="twTokenSec"
+                                    <input class="form-control" value="{{ $twTokenSec }}" id="twTokenSec"
                                            placeholder="Twitter Token Secret" type="text">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="twUser">Twitter User Name</label>
-                                    <input class="form-control" value="{{$twUser}}" id="twUser"
+                                    <input class="form-control" value="{{ $twUser }}" id="twUser"
                                            placeholder="Twitter User name"
                                            type="text">
                                 </div>
@@ -127,19 +128,19 @@
                             <div class="box-body">
                                 <div class="form-group">
                                     <label for="fbAppId">Facebook App ID</label>
-                                    <input class="form-control" value="{{$fbAppId}}" id="fbAppId"
+                                    <input class="form-control" value="{{ $fbAppId }}" id="fbAppId"
                                            placeholder="Facebook App ID"
                                            type="text">
                                 </div>
                                 <div class="form-group">
                                     <label for=fbAppSec">Facebook App Secret</label>
-                                    <input class="form-control" value="{{$fbAppSec}}" id="fbAppSec"
+                                    <input class="form-control" value="{{ $fbAppSec }}" id="fbAppSec"
                                            placeholder="Facebook App Secret" type="text">
                                 </div>
 
                                 <div class="form-group">
                                     <label for=fbAppSec">Facebook Token</label>
-                                    <input class="form-control" value="{{$fbToken}}" id="fbToken"
+                                    <input class="form-control" value="{{ $fbToken }}" id="fbToken"
                                            placeholder="Facebook Token"
                                            type="text">
                                 </div>
@@ -148,7 +149,7 @@
                                     <label for="fbPages">Facebook Default page</label>
                                     <select id="fbPages">
                                         @foreach($fbPages as $pages)
-                                            <option value="{{$pages->pageId}}">{{ $pages->pageName }}</option>
+                                            <option value="{{ $pages->pageId }}">{{ $pages->pageName }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -212,11 +213,14 @@
                             <div class="box-body">
                                 <div class="form-group">
                                     <label for="skypeUser">Skype username</label>
-                                    <input class="form-control" type="text" value="{{\App\Http\Controllers\Data::get('skypeUser')}}" id="skypeUser">
+                                    <input class="form-control" type="text"
+                                           value="{{ \App\Http\Controllers\Data::get('skypeUser') }}" id="skypeUser">
                                 </div>
                                 <div class="form-group">
                                     <label for="skypePass">Skype password</label>
-                                    <input class="form-control" value="{{\App\Http\Controllers\Data::get('skypePass')}}" type="password" id="skypePass">
+                                    <input class="form-control"
+                                           value="{{ \App\Http\Controllers\Data::get('skypePass') }}"
+                                           type="password" id="skypePass">
                                 </div>
 
                             </div><!-- /.box-body -->
