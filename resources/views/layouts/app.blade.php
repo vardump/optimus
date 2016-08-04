@@ -11,6 +11,9 @@
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <link rel="shortcut icon" href="{{ url('/favicon.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ url('/favicon.ico') }}" type="image/x-icon">
+
     {{--Bootstrap and Sass--}}
     <link rel="stylesheet" href="{{ elixir('css/app.css') }}">
 
@@ -26,7 +29,6 @@
     {{--custom css--}}
     <link rel="stylesheet" href="/opt/css/custom.css">
     <link rel="stylesheet" href="/opt/intro/introjs.css">
-
 
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -62,17 +64,17 @@
 
 <script>
     {{--emoji start--}}
-     $(document).ready(function() {
-         if(document.getElementById('status')){
-             $("#status").emojioneArea({
-                 pickerPosition: "bottom"
-             });
-         }
+     $(document).ready(function () {
+        if (document.getElementById('status')) {
+            $("#status").emojioneArea({
+                pickerPosition: "bottom"
+            });
+        }
 //        if(document.getElementById('facebookpage')){
 //            $(".input-sm").emojioneArea();
 //        }
 
-        if(document.getElementById('skype')){
+        if (document.getElementById('skype')) {
             $("#message").emojioneArea();
         }
     });
