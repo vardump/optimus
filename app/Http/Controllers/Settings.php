@@ -64,7 +64,6 @@ class Settings extends Controller
             $helper = $fb->getRedirectLoginHelper();
             $loginUrl = $helper->getLoginUrl(url('') . '/fbconnect', $permissions);
         } catch (\Exception $e) {
-            $helper = url('/');
             $loginUrl = url('/');
         }
 
@@ -96,12 +95,13 @@ class Settings extends Controller
             DB::table('settings')->where('field', 'wpUser')->update(['value' => $user]);
             DB::table('settings')->where('field', 'wpPassword')->update(['value' => $pass]);
             DB::table('settings')->where('field', 'wpUrl')->update(['value' => $url]);
+
             return "success";
+
         } catch (\PDOException $e) {
+
             return $e->getMessage();
         }
-
-
     }
 
     public function twSave(Request $re)
@@ -117,8 +117,11 @@ class Settings extends Controller
             DB::table('settings')->where('field', 'twToken')->update(['value' => $twToken]);
             DB::table('settings')->where('field', 'twTokenSec')->update(['value' => $twToeknSec]);
             DB::table('settings')->where('field', 'twUser')->update(['value' => $twUser]);
+
             return "success";
+
         } catch (\PDOException $e) {
+
             return $e->getMessage();
         }
     }
@@ -136,8 +139,11 @@ class Settings extends Controller
             DB::table('settings')->where('field', 'tuToken')->update(['value' => $tuToken]);
             DB::table('settings')->where('field', 'tuTokenSec')->update(['value' => $tuTokenSec]);
             DB::table('settings')->where('field', 'tuDefBlog')->update(['value' => $tuDefBlog]);
+
             return "success";
+
         } catch (\PDOException $e) {
+
             return $e->getMessage();
         }
     }
@@ -176,7 +182,7 @@ class Settings extends Controller
             DB::table('settings')->where('field', 'fbAppToken')->update(['value' => $accessToken]); // save user access token to database
             $this->saveFbPages(); // save facebook pages and token
             $this->saveFbGroups(); // save facebook groups to database
-//                return "Token saved";
+
         } catch (FacebookResponseException $e) {
             // When Graph returns an error
             return '[a] Graph returned an error: ' . $e->getMessage();
@@ -248,7 +254,6 @@ class Settings extends Controller
 
             }
 
-
         } catch (FacebookResponseException $e) {
             return 'Graph returned an error: ' . $e->getMessage();
             exit;
@@ -274,49 +279,29 @@ class Settings extends Controller
             $response = $fb->get('me/groups', $this->config('fbAppToken'));
             $body = $response->getBody();
             $data = json_decode($body, true);
-//            print_r($data);
+
             foreach ($data['data'] as $no => $field) {
                 $group = facebookGroups::where('pageId', $field['id'])->first();
                 $facebookGroup = new facebookGroups();
+
                 if (empty($group)) {
                     $facebookGroup->pageId = $field['id'];
                     $facebookGroup->pageName = $field['name'];
                     $facebookGroup->privacy = $field['privacy'];
                     $facebookGroup->save();
+
                 } else {
                     facebookGroups::where('pageId', $field['id'])->update(['privacy' => $field['privacy']]);
                 }
-
-
             }
-//            foreach ($data['data'] as $no => $filed) {
-//                $pages = FacebookPages::where('pageId',$filed['id'])->first();
-//                $facebookPages = new FacebookPages();
-//                if(empty($pages))
-//                {
-//
-//                    $facebookPages->pageId = $filed['id'];
-//                    $facebookPages->pageName = $filed['name'];
-//                    $facebookPages->pageToken = $filed['access_token'];
-//                    $facebookPages->save();
-//
-//                }
-//                else{
-//                    FacebookPages::where('pageId',$filed['id'])->update(['pageToken'=> $filed['access_token']]);
-//                }
-//                return $filed['name'] ."<br>";
-//
-//            }
-
 
         } catch (FacebookResponseException $e) {
-            return 'Graph returned an error: ' . $e->getMessage();
-            exit;
-        } catch (FacebookSDKException $e) {
-            return 'Facebook SDK returned an error: ' . $e->getMessage();
-            exit;
-        }
 
+            return 'Graph returned an error: ' . $e->getMessage();
+        } catch (FacebookSDKException $e) {
+
+            return 'Facebook SDK returned an error: ' . $e->getMessage();
+        }
     }
 
     public function total_likes()
@@ -341,17 +326,15 @@ class Settings extends Controller
 
 
             }
+
             return $total_likes;
 
         } catch (FacebookResponseException $e) {
-            return "error fl1";
-            return 'Graph returned an error: ' . $e->getMessage();
-            exit;
-        } catch (FacebookSDKException $e) {
-            return "error fl2";
-            return 'Facebook SDK returned an error: ' . $e->getMessage();
-            exit;
 
+            return 'Graph returned an error: ' . $e->getMessage();
+        } catch (FacebookSDKException $e) {
+
+            return 'Facebook SDK returned an error: ' . $e->getMessage();
         }
     }
 
@@ -363,6 +346,7 @@ class Settings extends Controller
         $tokenSecret = Data::get('tuTokenSec');
 
         $tuClient = new Client($consumerKey, $consumerSecret, $token, $tokenSecret);
+
         try {
             $tuBlogName = $tuClient->getUserInfo()->user->blogs;
 
@@ -409,6 +393,7 @@ class Settings extends Controller
     /**
      * @param Request $re
      * save notification settings
+     * @return string
      */
     public function notifySave(Request $re)
     {
@@ -433,6 +418,4 @@ class Settings extends Controller
             return $e->getMessage();
         }
     }
-
-
 }
