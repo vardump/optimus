@@ -8,11 +8,11 @@
                 <img src="{{ url('/images/admin-lte/avatar.png') }}" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
-                <p>Username</p>
+                <p>{{ \Auth::user()->name }}</p>
                 <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
         </div>
-        
+
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
