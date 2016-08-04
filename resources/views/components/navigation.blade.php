@@ -98,7 +98,7 @@
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <img src="{{ url('/images/admin-lte/avatar.png') }}" class="user-image" alt="User Image">
-                        <span class="hidden-xs">User Name</span>
+                        <span class="hidden-xs">{{ \Auth::user()->name }}</span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
@@ -106,8 +106,8 @@
                             <img src="{{ url('/images/admin-lte/avatar.png') }}" class="img-circle"
                                  alt="User Image">
                             <p>
-                                Username
-                                <small>email@gmail.com</small>
+                                {{ \Auth::user()->name }}
+                                <small>{{ \Auth::user()->email }}</small>
                             </p>
                         </li>
 
