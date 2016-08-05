@@ -71,10 +71,12 @@ class Scraper extends Controller
 
     public function twitterScrapper(Request $re)
     {
-        $consumerKey = Followers::get_value('twConKey');
-        $consumerSecret = Followers::get_value('twConSec');
-        $accessToken = Followers::get_value('twToken');
-        $tokenSecret = Followers::get_value('twTokenSec');
+
+
+        $consumerKey = FollowersController::get_value('twConKey');
+        $consumerSecret = FollowersController::get_value('twConSec');
+        $accessToken = FollowersController::get_value('twToken');
+        $tokenSecret = FollowersController::get_value('twTokenSec');
 
         $query = $re->data;
         $limit = $re->limit;
