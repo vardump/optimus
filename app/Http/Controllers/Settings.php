@@ -91,6 +91,9 @@ class Settings extends Controller
         $url = $re->wpUrl;
         $user = $re->wpUser;
         $pass = $re->wpPassword;
+        if($url == "" || $user == "" || $pass==""){
+            return "Please fill the necessary fields";
+        }
         try {
             DB::table('settings')->where('field', 'wpUser')->update(['value' => $user]);
             DB::table('settings')->where('field', 'wpPassword')->update(['value' => $pass]);
@@ -111,6 +114,11 @@ class Settings extends Controller
         $twToken = $re->twToken;
         $twToeknSec = $re->twTokenSec;
         $twUser = $re->twUser;
+
+        if($twConKey=="" || $twConSec == "" || $twToken=="" || $twToeknSec == "" ){
+            return "Please fill the necessary fields";
+        }
+
         try {
             DB::table('settings')->where('field', 'twConKey')->update(['value' => $twConKey]);
             DB::table('settings')->where('field', 'twConSec')->update(['value' => $twConSec]);
@@ -133,6 +141,11 @@ class Settings extends Controller
         $tuToken = $re->tuToken;
         $tuTokenSec = $re->tuTokenSec;
         $tuDefBlog = $re->tuDefBlog;
+
+        if($tuConKey == "" || $tuConSec == "" || $tuToken == "" || $tuTokenSec){
+            return "Please fill the necessary fields";
+        }
+
         try {
             DB::table('settings')->where('field', 'tuConKey')->update(['value' => $tuConKey]);
             DB::table('settings')->where('field', 'tuConSec')->update(['value' => $tuConSec]);
@@ -154,6 +167,9 @@ class Settings extends Controller
         $appSec = $re->fbAppSec;
         $token = $re->fbToken;
         $fbPages = $re->fbPages;
+        if($appId == "" || $appSec == "" || $token == ""){
+            return "Please fill the necessary fields";
+        }
         try {
             DB::table('settings')->where('field', 'fbAppId')->update(['value' => $appId]);
             DB::table('settings')->where('field', 'fbAppSec')->update(['value' => $appSec]);
@@ -362,7 +378,7 @@ class Settings extends Controller
 
 
         } catch (\Exception $e) {
-            $tuMsg = "error";
+            return $e->getMessage();
         }
         return redirect('settings');
     }
