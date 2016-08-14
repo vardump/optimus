@@ -12,26 +12,32 @@
             <form role="form" method="POST" action="{{ url('/login') }}">
                 {!! csrf_field() !!}
 
-                <div class="form-group has-feedback">
-                    <input type="email" placeholder="Your email" class="form-control" name="email"
-                           value="{{ old('email') }}">
-                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-                </div>
-                @if ($errors->has('email'))
-                    <span class="help-block">
-                    <strong>{{ $errors->first('email') }}</strong>
-                </span>
-                @endif
+                <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                    <div class="form-group has-feedback">
+                        <input type="email" placeholder="Your email" class="form-control" name="email"
+                               value="{{ old('email') }}">
+                        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                    </div>
 
-                <div class="form-group has-feedback">
-                    <input type="password" placeholder="Password" class="form-control" name="password">
-                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                    @if ($errors->has('email'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('email') }}</strong>
+                        </span>
+                    @endif
                 </div>
-                @if ($errors->has('password'))
-                    <span class="help-block">
-                    <strong>{{ $errors->first('password') }}</strong>
-                </span>
-                @endif
+
+                <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                    <div class="form-group has-feedback">
+                        <input type="password" placeholder="Password" class="form-control" name="password">
+                        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                    </div>
+
+                    @if ($errors->has('password'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('password') }}</strong>
+                        </span>
+                    @endif
+                </div>
 
                 <div class="row">
 

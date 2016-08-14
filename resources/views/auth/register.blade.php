@@ -5,7 +5,7 @@
     <div class="container">
         <div class="login-box">
             <div class="login-logo">
-                <a href="#"><img src="{{url('/images/optimus/logo-login.png')}}" alt="Optimus"><b>Optimus</b></a>
+                <a href="#"><img src="{{ url('/images/optimus/logo-login.png') }}" alt="Optimus"><b>Optimus</b></a>
             </div>
             <div class="login-box-body">
 
